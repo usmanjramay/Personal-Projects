@@ -1,0 +1,15 @@
+# Local Claude Code settings (machine-specific permissions)
+.claude/settings.local.json
+
+# Local working files
+Temp/
+Skills/
+
+# VS Code workspace file
+*.code-workspace
+
+# macOS
+.DS_Store
+
+# Google Drive temp uploads
+.tmp.driveupload/
