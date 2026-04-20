@@ -1,0 +1,79 @@
+Project Specification: Sovereign AI Agent Browser Access (2026)
+1. Executive Summary
+The Problem: Modern travel and airline websites (e.g., United, Delta, Skyscanner) utilize aggressive anti-bot measures such as Cloudflare Turnstile and Akamai. Standard VPS IP addresses and "headless" browsers (Selenium/Playwright) are flagged and blocked instantly. Furthermore, running agents on a primary machine presents an unacceptable security risk to personal data ("Agent Blast Radius").
+
+The Solution: An "Air-Gapped Device Bridge." This architecture uses a physical iPhone (The Body) connected to a Linux Home Server (The Bridge). A Claude agent on a remote VPS (The Brain) controls the iPhone via a private Tailscale network using the Model Context Protocol (MCP). This provides a legitimate residential IP and a 100% human-level mobile browser fingerprint.
+
+2. System Architecture
+The Brain (Cloud VPS): Hosts the Claude agent. It performs the reasoning and decision-making.
+
+The Network (Tailscale): A private, encrypted mesh network that connects the VPS to the Home Server without exposing ports to the public internet.
+
+The Bridge (Linux Home Server): A local machine running mobile-mcp and usbmuxd to translate AI commands into hardware actions.
+
+The Body (Physical iPhone): An old iPhone connected via USB to the Linux server. It runs the actual Safari browser or native apps.
+
+3. User Story & Acceptance Criteria
+User Story: "As a user, I want my Claude agent to check flight prices using a physical iPhone connected to my home server, so that I can bypass bot detection while keeping my primary data isolated from the agent's environment."
+
+Acceptance Criteria (AC)
+
+AC 1: Secure Connectivity: The VPS agent must successfully ping the Linux Home Server's Tailscale IP.
+
+AC 2: MCP Service: The mobile-mcp server must be active on the Linux host and registered in the agent’s mcp_config.json.
+
+AC 3: Hardware Link: The Linux host must detect the iPhone via USB (verified via lsusb) and maintain an active WebDriverAgent (WDA) session.
+
+AC 4: Vision-Action Loop: The agent must be able to:
+
+Request a screenshot via the get_screenshot tool.
+
+Identify UI elements visually.
+
+Execute a tap(x, y) command on the physical device.
+
+AC 5: Bot Bypass: The agent must be able to complete a full flight search without being flagged as a bot or triggering a CAPTCHA.
+
+4. Implementation Checklist
+Phase 1: iPhone Preparation (Requires a Mac)
+
+[ ] Connect iPhone to a Mac and open Xcode.
+
+[ ] Clone the WebDriverAgent (WDA) project.
+
+[ ] Re-sign the WDA app with a personal Apple ID.
+
+[ ] Build and Install WDA onto the iPhone.
+
+[ ] Enable "UI Automation" in the iPhone's Developer Settings.
+
+Phase 2: Linux Home Server Setup
+
+[ ] Connect the iPhone via USB.
+
+[ ] Install usbmuxd and libimobiledevice.
+
+[ ] Install the MCP server: npx -y @mobilenext/mobile-mcp@latest.
+
+[ ] Ensure Tailscale is active and the device is visible to the VPS.
+
+Phase 3: VPS Configuration
+
+[ ] Update mcp_config.json with the Tailscale IP of the home server:
+"url": "http://[TAILSCALE-IP]:3000/mcp"
+
+[ ] Test the "Vision Loop" by asking Claude: "Tell me what is currently on my iPhone screen."
+
+5. Alternative Options Evaluated
+Option	Status	Reason for Rejection
+Personal Laptop	REJECTED	Risk. High "Blast Radius" potential for AI to affect personal files/accounts.
+Cloud Sandboxes	REJECTED	Cost/Detection. Expensive per-minute billing and data-center IPs are often flagged.
+Qalti (macOS)	REJECTED	Platform Lock. Requires a Mac host and is often tied to proprietary paid APIs.
+Open Minis (App)	REJECTED	Limited. Cannot leave the app's internal sandbox to use native iPhone apps.
+iPhone Bridge	SELECTED	Sovereign & Stealth. Uses your home IP and real hardware; zero recurring costs.
+6. Maintenance & Scalability
+Free Tier: The WDA app must be re-signed/re-installed every 7 days using a free Apple Developer account.
+
+Pro Tier: Upgrading to a $99/year Apple Developer account allows the WDA app to remain active for one year without intervention.
+
+Self-Healing: If the connection drops, the VPS agent can use Tailscale SSH to reboot the Linux mobile-mcp service.

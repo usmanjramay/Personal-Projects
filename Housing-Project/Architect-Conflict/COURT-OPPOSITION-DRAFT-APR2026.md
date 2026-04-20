@@ -2,6 +2,18 @@
 
 ---
 
+**[REPURPOSING NOTE — 2026-04-19]**
+
+**This file is no longer the court opposition filing.** The Justice de Paix clerk confirmed by phone that a short email containing only a summary of the grounds (Art. 131 NCPC — *"indication sommaire des motifs"*) is sufficient at the filing stage. That short opposition email has been moved to @EMAIL-OPPOSITION-APR2026.md and is the document that will be filed with the court by the 23 April 2026 deadline.
+
+**Going forward, this document is being repurposed as the working draft for a _mise en demeure_** to be sent to ATAM Architecture & Management SARL by registered letter (*lettre recommandée avec accusé de réception*). A mise en demeure is a formal notice of default under Art. 1139 Code civil — it is the procedural prerequisite for invoking résolution under Art. 1184 and strengthens the exception d'inexécution defence. The detailed facts, legal grounds, and evidence index already assembled in this file are exactly what a proper mise en demeure needs; the structure will be adapted (removal of court-filing framing, addition of a formal demand for cure within a specified deadline, restructuring into a registered-letter format) in subsequent edits.
+
+**All content below this note is from the original court-opposition draft and needs to be reworked for the mise en demeure purpose.** Do not file any version of this document with the court.
+
+---
+
+**[ORIGINAL FILING NOTE — SUPERSEDED]**
+
 **[FILING NOTE: This document is drafted in English and must be translated into French by a qualified legal translator before filing with the Justice de Paix de Luxembourg. All legal citations refer to Luxembourg law. Appendix references correspond to the evidence list attached to this opposition.]**
 
 ---

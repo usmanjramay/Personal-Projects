@@ -246,6 +246,7 @@ Old April 14 n8n workflows (three-agent architecture) still active — kept duri
 - [ ] Delete old April 14 n8n workflows (Task Intake, Planner, Executor, Reviewer, Delivery, Retrospective, Email Watcher, Weekly Review, n8n Backup) — _target ~2026-04-25_
 - [ ] Create social media accounts for the EA under its own identity
 - [ ] Decide on a process for the EA sending emails on Usman's behalf — what authorization looks like, what guardrails are needed
+- [ ] Give the EA access to the Old iPhone as an air-gapped browser for bot-resistant web tasks (flight search, etc.) — see [Ideas/Old-Iphone-Agent](Ideas/Old-Iphone-Agent) for full spec and implementation checklist
 - Idea: progress ping after N minutes on long turns (currently user waits silently)
 - Idea: extra slash commands beyond `/done` (e.g. `/pause`, `/status`)
 - Idea: web UI dashboard once the system is mature
