@@ -143,15 +143,14 @@ The thin shell wrapper handles:
 
 The system prompt file defines:
 
-- **Role:** Chief of Staff — receive tasks from Usman via WhatsApp, execute autonomously, report results concisely.
+- **Role:** Executive Assistant — receive tasks from Usman via WhatsApp, execute autonomously, report results concisely.
 - **Communication style:** Under ~2000 characters per reply; never dump raw logs or command output; push detail to `dashboard.md`.
-- **Sub-agents:** For non-trivial or parallelizable work, use the Task tool. Parallelize where independent.
-- **Self-review:** Before replying, check output against what Usman actually asked. If uncertain, ask him.
+- **Tools:** Playwright browser scripts in `/home/agent/scripts/`; email identity `sophia@ptriconsulting.com` with credentials at `/home/agent/memory/email-credentials.md`; Task tool for sub-agents and parallelism.
 - **`dashboard.md` discipline:** On any turn that touches a task, update it. Schema: Active, Paused, Done, Open Questions.
-- **`/done` closing work:** When the user says `/done`, update `dashboard.md`, save important learnings to the second brain (if any), return a concise summary.
-- **Destructive operations forbidden:** Never `rm -rf`, never modify `/etc`, never force-push to shared repos. VPS weekly snapshot is the safety net, not a license.
-- **Failure reporting:** If something fails, return what was attempted, what went wrong (specific error), and what recovery was tried.
-- **Authentication:** OAuth token sourced from `.profile`.
+- **`/done` closing work:** Update `dashboard.md`, save important learnings to the second brain, return a concise summary.
+- **Destructive operations forbidden:** Never `rm -rf`, never modify `/etc`, never force-push to shared repos.
+- **Failure reporting:** What was attempted → what went wrong (specific error) → what recovery was tried.
+- **Directory rule:** All task files (scripts, screenshots, data) go to `workdir/`, never to `chief-of-staff/`. Files in `workdir/` older than 7 days are auto-deleted by `cos-turn.sh`.
 
 ### `/done` Semantics
 
@@ -243,7 +242,8 @@ Old April 14 n8n workflows (three-agent architecture) still active — kept duri
 
 ## Open Tasks and Ideas
 
-- [ ] Delete old April 14 n8n workflows (Task Intake, Planner, Executor, Reviewer, Delivery, Retrospective, Email Watcher, Weekly Review, n8n Backup) — _target ~2026-04-25_
+- [ ] Delete old April 14 n8n workflows (Task Intake, Planner, Executor, Reviewer, Delivery, Retrospective, Email Watcher, Weekly Review, n8n Backup) and remove any associated files, prompts, or instructions left on the VPS from the old three-agent architecture (e.g. old CLAUDE.md versions, agent scripts, or config files that are no longer used) — _target ~2026-04-25_
+- [ ] Build a French phone agent — Usman lives in Luxembourg and frequently needs to make calls in French but does not speak the language. The agent should be able to make outbound calls on his behalf, conduct the conversation in French, and report back a summary. Needs research into the right platform (e.g. Bland.ai, Retell.ai, or similar) and integration with the EA so Usman can trigger a call via WhatsApp.
 - [ ] Create social media accounts for the EA under its own identity
 - [ ] Decide on a process for the EA sending emails on Usman's behalf — what authorization looks like, what guardrails are needed
 - [ ] Give the EA access to the Old iPhone as an air-gapped browser for bot-resistant web tasks (flight search, etc.) — see [Ideas/Old-Iphone-Agent](Ideas/Old-Iphone-Agent) for full spec and implementation checklist
