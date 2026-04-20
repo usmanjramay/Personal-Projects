@@ -242,7 +242,7 @@ Old April 14 n8n workflows (three-agent architecture) still active — kept duri
 
 ## Open Tasks and Ideas
 
-- [ ] Delete old April 14 n8n workflows (Task Intake, Planner, Executor, Reviewer, Delivery, Retrospective, Email Watcher, Weekly Review, n8n Backup) and remove any associated files, prompts, or instructions left on the VPS from the old three-agent architecture (e.g. old CLAUDE.md versions, agent scripts, or config files that are no longer used) — _target ~2026-04-25_
+- [x] Delete old April 14 n8n workflows (Task Intake, Executor, Reviewer, Delivery, Retrospective, Email Watcher, Weekly Review, n8n Backup, Agent: Send WhatsApp) and remove associated VPS files from the old three-agent architecture (`prompts/`, `schemas/`) — _completed 2026-04-21_
 - [ ] Build a French phone agent — Usman lives in Luxembourg and frequently needs to make calls in French but does not speak the language. The agent should be able to make outbound calls on his behalf, conduct the conversation in French, and report back a summary. Needs research into the right platform (e.g. Bland.ai, Retell.ai, or similar) and integration with the EA so Usman can trigger a call via WhatsApp.
 - [ ] Create social media accounts for the EA under its own identity
 - [ ] Decide on a process for the EA sending emails on Usman's behalf — what authorization looks like, what guardrails are needed
