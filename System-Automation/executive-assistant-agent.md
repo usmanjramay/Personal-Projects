@@ -103,6 +103,9 @@ The original three-agent architecture (Planner → Executor → Reviewer) was ri
 ├── chief-of-staff/
 │   ├── CLAUDE.md                # system prompt for the agent
 │   └── dashboard.md             # Claude's own task tracker
+├── memory/
+│   └── whatsapp-token.txt       # permanent WhatsApp system user access token (chmod 600)
+├── workdir/                     # task scratch space; files >7 days auto-deleted
 ├── .cos-session                 # current session ID (plaintext)
 ├── .cos-session.lock            # flock target for concurrency control
 └── logs/
@@ -124,18 +127,20 @@ If duplicates exist, remove npm-backed symlinks only after confirming the native
 
 The thin shell wrapper handles:
 
-1. Accept incoming message as a single command-line argument.
-2. Acquire `flock` on `.cos-session.lock` (blocks if another turn is running; processes messages strictly in arrival order).
-3. Detect `/done` prefix; if present, augment the message with the wrap-up directive before passing to Claude.
-4. Decide whether to resume: check `.cos-session` exists and is <2 days old.
+1. Accept `$1` (base64-encoded message, may include reply-context prefix) and `$2` (optional WhatsApp media ID).
+2. Decode `$1` to get the message text.
+3. **If `$2` is non-empty (media message):** read WhatsApp token from `/home/agent/memory/whatsapp-token.txt`, call the WhatsApp API to get the media download URL, download the file to `/home/agent/workdir/photo-<timestamp>.jpg`, prepend `[Image: <path>]` to the message. On any failure (token missing, API error, empty file), prepend a plain-language error note instead.
+4. Acquire `flock` on `.cos-session.lock` (blocks if another turn is running; processes messages strictly in arrival order).
+5. Detect `/done` prefix; if present, augment the message with the wrap-up directive before passing to Claude.
+6. Decide whether to resume: check `.cos-session` exists and is <2 days old.
    - If yes: `claude --resume $SESSION_ID -p "<msg>"`
    - If no: `claude -p "<msg>"` (new session)
-5. Parse Claude's JSON output: extract `.result` (reply text) and `.session_id`.
-6. Persist session ID to `.cos-session` (and optionally mirror to Supabase for recovery).
-7. If `/done`: clear `.cos-session` on success.
-8. POST `{reply: "<result>"}` to the CoS: Outbound webhook.
-9. On Claude non-zero exit: POST a plain-language error + last 20 lines of stderr to WhatsApp.
-10. Release lock. Append every turn to the daily log (`/home/agent/logs/cos-turn-YYYY-MM-DD.log`).
+7. Parse Claude's JSON output: extract `.result` (reply text) and `.session_id`.
+8. Persist session ID to `.cos-session` (and optionally mirror to Supabase for recovery).
+9. If `/done`: clear `.cos-session` on success.
+10. POST `{reply: "<result>"}` to the CoS: Outbound webhook.
+11. On Claude non-zero exit: POST a plain-language error + last 20 lines of stderr to WhatsApp.
+12. Release lock. Append every turn to the daily log (`/home/agent/logs/cos-turn-YYYY-MM-DD.log`).
 
 **Important:** Messages are passed safely via SSH (not as unquoted shell arguments) to avoid command-injection and quoting issues with user text containing quotes, backticks, newlines, or emojis.
 
@@ -169,7 +174,10 @@ Behavior:
 
 - **Trigger:** WhatsApp Trigger node, credential `Send WhatsApp Personal` (Usman's personal number).
 - **Filter:** Only process messages from Usman's own number (`352621486096`). Drop everything else.
-- **Action:** SSH node (`Sophia's VPS SSH` credential). Command: `nohup /home/agent/bin/cos-turn.sh "<msg>" >> /home/agent/logs/cos-turn-$(date +%Y-%m-%d).log 2>&1 &`
+- **Encode Message node:** Detects message type (text, image, document, video, audio). Extracts media ID and caption/text. If the message is a WhatsApp reply (using the reply function), prepends `[Replying to: <message_id>]` to the text. Base64-encodes the final message.
+- **Action:** SSH node (`Sophia's VPS SSH` credential). Command: `nohup /home/agent/bin/cos-turn.sh <msg_b64> <media_id> >> /home/agent/logs/cos-turn-$(date +%Y-%m-%d).log 2>&1 &`
+  - `$1` = base64-encoded message (may include reply context prefix)
+  - `$2` = WhatsApp media ID (empty string for text-only messages)
   - Background dispatch so SSH returns immediately (webhook responds 200 without waiting on Claude).
 - **Response:** Immediate 200. No waiting on Claude.
 
@@ -243,6 +251,9 @@ Old April 14 n8n workflows (three-agent architecture) still active — kept duri
 ## Open Tasks and Ideas
 
 - [x] Delete old April 14 n8n workflows (Task Intake, Executor, Reviewer, Delivery, Retrospective, Email Watcher, Weekly Review, n8n Backup, Agent: Send WhatsApp) and remove associated VPS files from the old three-agent architecture (`prompts/`, `schemas/`) — _completed 2026-04-21_
+- [x] Photo/media support: `CoS: Inbound` n8n workflow updated to detect image/video/document/audio and pass media_id to VPS — _completed 2026-04-21_
+- [x] Reply-context support: when Usman uses WhatsApp's reply function, the message is prefixed with `[Replying to: <id>]` so the EA knows which message is being referenced — _completed 2026-04-21_
+- [ ] **VPS setup required:** add the image download block to `cos-turn.sh` (Step 2 from the implementation session), and store the WhatsApp access token at `/home/agent/memory/whatsapp-token.txt` (Step 1)
 - [ ] Build a French phone agent — Usman lives in Luxembourg and frequently needs to make calls in French but does not speak the language. The agent should be able to make outbound calls on his behalf, conduct the conversation in French, and report back a summary. Needs research into the right platform (e.g. Bland.ai, Retell.ai, or similar) and integration with the EA so Usman can trigger a call via WhatsApp.
 - [ ] Create social media accounts for the EA under its own identity
 - [ ] Decide on a process for the EA sending emails on Usman's behalf — what authorization looks like, what guardrails are needed
