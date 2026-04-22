@@ -1,7 +1,7 @@
 # Executive Assistant (EA) Agent
 
 **Status:** Testing
-**Last updated:** 2026-04-19
+**Last updated:** 2026-04-22
 
 > A personal AI agent on the Hostinger VPS. Send a WhatsApp message, it executes the task autonomously using Claude Code CLI, and replies via WhatsApp. Conversation persists across messages using `--resume`.
 
@@ -253,7 +253,7 @@ Old April 14 n8n workflows (three-agent architecture) still active — kept duri
 - [x] Delete old April 14 n8n workflows (Task Intake, Executor, Reviewer, Delivery, Retrospective, Email Watcher, Weekly Review, n8n Backup, Agent: Send WhatsApp) and remove associated VPS files from the old three-agent architecture (`prompts/`, `schemas/`) — _completed 2026-04-21_
 - [x] Photo/media support: `CoS: Inbound` n8n workflow updated to detect image/video/document/audio and pass media_id to VPS — _completed 2026-04-21_
 - [x] Reply-context support: when Usman uses WhatsApp's reply function, the message is prefixed with `[Replying to: <id>]` so the EA knows which message is being referenced — _completed 2026-04-21_
-- [ ] **VPS setup required:** add the image download block to `cos-turn.sh` (Step 2 from the implementation session), and store the WhatsApp access token at `/home/agent/memory/whatsapp-token.txt` (Step 1)
+- [x] **VPS setup:** added image download block to `cos-turn.sh` and stored WhatsApp access token at `/home/agent/memory/whatsapp-token.txt` — photo sending confirmed working end-to-end _completed 2026-04-22_
 - [ ] Build a French phone agent — Usman lives in Luxembourg and frequently needs to make calls in French but does not speak the language. The agent should be able to make outbound calls on his behalf, conduct the conversation in French, and report back a summary. Needs research into the right platform (e.g. Bland.ai, Retell.ai, or similar) and integration with the EA so Usman can trigger a call via WhatsApp.
 - [ ] Create social media accounts for the EA under its own identity
 - [ ] Decide on a process for the EA sending emails on Usman's behalf — what authorization looks like, what guardrails are needed
