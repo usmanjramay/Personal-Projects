@@ -10,11 +10,13 @@
 ## User Story
 
 **Pain Points**
+
 1. No easy way to capture a thought, idea, or task quickly when on the move — most communication happens via WhatsApp, but opening separate apps or systems creates enough friction to lose the thought.
 2. For tasks that require research, browsing, comparison, or iteration (finding flights, researching purchases, setting up services), the human is still doing most of the legwork — AI conversations are transactional with no memory across sessions.
 3. Security concern: running an autonomous agent on a personal computer with personal accounts is risky — if it makes a mistake, it could affect real accounts, data, or systems.
 
 **Wish List**
+
 1. Send a WhatsApp message with a task or thought; receive a finished result or confirmation with no further input required
 2. Follow-up messages continue the same conversation naturally — no re-briefing needed
 3. Complex tasks that need parallel research are handled internally; one consolidated reply
@@ -23,9 +25,10 @@
 6. Any failure surfaces as a plain-language WhatsApp message — never silent
 7. The agent operates from its own accounts and identity, not Usman's personal ones
 
-_This list is the success criteria. Items 1–6 are confirmed. Item 7 is partially met (email identity exists; social media accounts pending)._
+*This list is the success criteria. Items 1–6 are confirmed. Item 7 is partially met (email identity exists; social media accounts pending).*
 
 **Potential Risks**
+
 1. No progress updates during long turns in v1 — user waits silently with no feedback
 2. Session auto-retires after 2 days of inactivity (evaluated at next message, not on a background timer)
 
@@ -35,17 +38,19 @@ _This list is the success criteria. Items 1–6 are confirmed. Item 7 is partial
 
 ### Components
 
-| Component | Where | Purpose |
-|-----------|-------|---------|
-| `CoS: Inbound` workflow | n8n (see @n8n_setup.md) | WhatsApp trigger → SSH → fires `cos-turn.sh` in background |
-| `CoS: Outbound` workflow | n8n | Webhook → sends Claude's reply to WhatsApp |
-| `cos-turn.sh` | VPS `/home/agent/bin/` (see @remote_vps.md) | Lock, resume/start session, run Claude, post reply, unlock |
-| `CLAUDE.md` (system prompt) | VPS `/home/agent/chief-of-staff/` | Role, behavior rules, sub-agent usage, `/done` discipline |
-| `dashboard.md` | VPS `/home/agent/chief-of-staff/` | Claude's own task scratchpad |
-| `.cos-session` | VPS `/home/agent/` | Current session ID (plaintext) |
-| `.cos-session.lock` | VPS `/home/agent/` | flock target — enforces serial turn processing |
-| Claude Code CLI | VPS | The brain. Native installer, OAuth from Usman's Max plan. |
-| Agent email | `sophia@ptriconsulting.com` | EA's own identity for sign-ups, verifications, and outbound emails |
+
+| Component                   | Where                                       | Purpose                                                            |
+| --------------------------- | ------------------------------------------- | ------------------------------------------------------------------ |
+| `CoS: Inbound` workflow     | n8n (see @n8n_setup.md)                     | WhatsApp trigger → SSH → fires `cos-turn.sh` in background         |
+| `CoS: Outbound` workflow    | n8n                                         | Webhook → sends Claude's reply to WhatsApp                         |
+| `cos-turn.sh`               | VPS `/home/agent/bin/` (see @remote_vps.md) | Lock, resume/start session, run Claude, post reply, unlock         |
+| `CLAUDE.md` (system prompt) | VPS `/home/agent/chief-of-staff/`           | Role, behavior rules, sub-agent usage, `/done` discipline          |
+| `dashboard.md`              | VPS `/home/agent/chief-of-staff/`           | Claude's own task scratchpad                                       |
+| `.cos-session`              | VPS `/home/agent/`                          | Current session ID (plaintext)                                     |
+| `.cos-session.lock`         | VPS `/home/agent/`                          | flock target — enforces serial turn processing                     |
+| Claude Code CLI             | VPS                                         | The brain. Native installer, OAuth from Usman's Max plan.          |
+| Agent email                 | `sophia@ptriconsulting.com`                 | EA's own identity for sign-ups, verifications, and outbound emails |
+
 
 ### End-to-end flow
 
@@ -112,17 +117,6 @@ The original three-agent architecture (Planner → Executor → Reviewer) was ri
     └── cos-turn-YYYY-MM-DD.log  # per-day rolling log of every turn
 ```
 
-#### Claude Installation Audit
-
-Before deploying, verify the VPS runs the 2026 Claude Code native installer:
-
-- Single binary, likely `~/.claude/local/claude` or `/usr/local/bin/claude`.
-- No residual `/usr/bin/claude` or `/bin/claude` symlinks pointing at a global npm install.
-- `claude --version` returns a modern version.
-- OAuth token in `/home/agent/.profile` loads correctly.
-
-If duplicates exist, remove npm-backed symlinks only after confirming the native installer works with `claude --version` and a successful no-op invocation.
-
 #### `cos-turn.sh` Responsibilities
 
 The thin shell wrapper handles:
@@ -133,8 +127,8 @@ The thin shell wrapper handles:
 4. Acquire `flock` on `.cos-session.lock` (blocks if another turn is running; processes messages strictly in arrival order).
 5. Detect `/done` prefix; if present, augment the message with the wrap-up directive before passing to Claude.
 6. Decide whether to resume: check `.cos-session` exists and is <2 days old.
-   - If yes: `claude --resume $SESSION_ID -p "<msg>"`
-   - If no: `claude -p "<msg>"` (new session)
+  - If yes: `claude --resume $SESSION_ID -p "<msg>"`
+  - If no: `claude -p "<msg>"` (new session)
 7. Parse Claude's JSON output: extract `.result` (reply text) and `.session_id`.
 8. Persist session ID to `.cos-session` (and optionally mirror to Supabase for recovery).
 9. If `/done`: clear `.cos-session` on success.
@@ -151,8 +145,8 @@ The system prompt file defines:
 - **Role:** Executive Assistant — receive tasks from Usman via WhatsApp, execute autonomously, report results concisely.
 - **Communication style:** Under ~2000 characters per reply; never dump raw logs or command output; push detail to `dashboard.md`.
 - **Tools:** Playwright browser scripts in `/home/agent/scripts/`; email identity `sophia@ptriconsulting.com` with credentials at `/home/agent/memory/email-credentials.md`; Task tool for sub-agents and parallelism.
-- **`dashboard.md` discipline:** On any turn that touches a task, update it. Schema: Active, Paused, Done, Open Questions.
-- **`/done` closing work:** Update `dashboard.md`, save important learnings to the second brain, return a concise summary.
+- `**dashboard.md` discipline:** On any turn that touches a task, update it. Schema: Active, Paused, Done, Open Questions.
+- `**/done` closing work:** Update `dashboard.md`, save important learnings to the second brain, return a concise summary.
 - **Destructive operations forbidden:** Never `rm -rf`, never modify `/etc`, never force-push to shared repos.
 - **Failure reporting:** What was attempted → what went wrong (specific error) → what recovery was tried.
 - **Directory rule:** All task files (scripts, screenshots, data) go to `workdir/`, never to `chief-of-staff/`. Files in `workdir/` older than 7 days are auto-deleted by `cos-turn.sh`.
@@ -194,17 +188,19 @@ All Chief of Staff workflows created in the original three-agent design — Task
 
 ### Operational Rules
 
-| Concern | Rule |
-|---------|------|
-| **Concurrency** | `flock` on `.cos-session.lock`. Turns processed in arrival order. |
+
+| Concern                | Rule                                                                                                        |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **Concurrency**        | `flock` on `.cos-session.lock`. Turns processed in arrival order.                                           |
 | **Session retirement** | `/done` (explicit) or 2-day inactivity (evaluated when the next message arrives — never in the background). |
-| **Long turns** | No progress pings in v1. User waits silently during multi-minute turns. |
-| **Failure surfacing** | `cos-turn.sh` posts plain-language error + stderr tail to outbound webhook on any non-zero Claude exit. |
-| **Destructive ops** | Forbidden by system prompt. Weekly VPS snapshot is the safety net. |
-| **Secrets** | OAuth token in `.profile`. No credentials in session file, dashboard, or memory files. |
-| **Reply size** | System prompt caps replies at ~2000 chars. Overflow goes to `dashboard.md`. |
-| **Non-user messages** | WhatsApp trigger filters by sender ID before SSHing. |
-| **Logging** | Per-day rolling log in `/home/agent/logs/`. No rotation policy in v1. |
+| **Long turns**         | No progress pings in v1. User waits silently during multi-minute turns.                                     |
+| **Failure surfacing**  | `cos-turn.sh` posts plain-language error + stderr tail to outbound webhook on any non-zero Claude exit.     |
+| **Destructive ops**    | Forbidden by system prompt. Weekly VPS snapshot is the safety net.                                          |
+| **Secrets**            | OAuth token in `.profile`. No credentials in session file, dashboard, or memory files.                      |
+| **Reply size**         | System prompt caps replies at ~2000 chars. Overflow goes to `dashboard.md`.                                 |
+| **Non-user messages**  | WhatsApp trigger filters by sender ID before SSHing.                                                        |
+| **Logging**            | Per-day rolling log in `/home/agent/logs/`. No rotation policy in v1.                                       |
+
 
 ### Success Criteria
 
@@ -220,15 +216,17 @@ This system is successful when:
 
 ### Deferred Features (Explicitly Not in v1)
 
-| Feature | Defer until |
-|---------|-------------|
-| Progress pings on long turns | User reports the silence is a problem |
-| True background worker processes (multi-day tasks) | User has a concrete multi-day task |
-| Extra slash commands beyond `/done` | User asks for one |
-| Web UI dashboard | User wants one |
-| Deletion of old n8n workflows | ≥1 week of reliable new-system usage |
-| Separate sessions per task-thread | User finds a single long session gets confused across topics |
-| Retrospective / weekly self-improvement loop | Post-v1; re-evaluate whether still worth building |
+
+| Feature                                            | Defer until                                                  |
+| -------------------------------------------------- | ------------------------------------------------------------ |
+| Progress pings on long turns                       | User reports the silence is a problem                        |
+| True background worker processes (multi-day tasks) | User has a concrete multi-day task                           |
+| Extra slash commands beyond `/done`                | User asks for one                                            |
+| Web UI dashboard                                   | User wants one                                               |
+|                                                    |                                                              |
+| Separate sessions per task-thread                  | User finds a single long session gets confused across topics |
+| Retrospective / weekly self-improvement loop       | Post-v1; re-evaluate whether still worth building            |
+
 
 ### Open Implementation Decisions
 
@@ -250,14 +248,14 @@ Old April 14 n8n workflows (three-agent architecture) still active — kept duri
 
 ## Open Tasks and Ideas
 
-- [x] Delete old April 14 n8n workflows (Task Intake, Executor, Reviewer, Delivery, Retrospective, Email Watcher, Weekly Review, n8n Backup, Agent: Send WhatsApp) and remove associated VPS files from the old three-agent architecture (`prompts/`, `schemas/`) — _completed 2026-04-21_
-- [x] Photo/media support: `CoS: Inbound` n8n workflow updated to detect image/video/document/audio and pass media_id to VPS — _completed 2026-04-21_
-- [x] Reply-context support: when Usman uses WhatsApp's reply function, the message is prefixed with `[Replying to: <id>]` so the EA knows which message is being referenced — _completed 2026-04-21_
-- [x] **VPS setup:** added image download block to `cos-turn.sh` and stored WhatsApp access token at `/home/agent/memory/whatsapp-token.txt` — photo sending confirmed working end-to-end _completed 2026-04-22_
-- [ ] Build a French phone agent — Usman lives in Luxembourg and frequently needs to make calls in French but does not speak the language. The agent should be able to make outbound calls on his behalf, conduct the conversation in French, and report back a summary. Needs research into the right platform (e.g. Bland.ai, Retell.ai, or similar) and integration with the EA so Usman can trigger a call via WhatsApp.
-- [ ] Create social media accounts for the EA under its own identity
-- [ ] Decide on a process for the EA sending emails on Usman's behalf — what authorization looks like, what guardrails are needed
-- [ ] Give the EA access to the Old iPhone as an air-gapped browser for bot-resistant web tasks (flight search, etc.) — see [Ideas/Old-Iphone-Agent](Ideas/Old-Iphone-Agent) for full spec and implementation checklist
+- Delete old April 14 n8n workflows (Task Intake, Executor, Reviewer, Delivery, Retrospective, Email Watcher, Weekly Review, n8n Backup, Agent: Send WhatsApp) and remove associated VPS files from the old three-agent architecture (`prompts/`, `schemas/`) — *completed 2026-04-21*
+- Photo/media support: `CoS: Inbound` n8n workflow updated to detect image/video/document/audio and pass media_id to VPS — *completed 2026-04-21*
+- Reply-context support: when Usman uses WhatsApp's reply function, the message is prefixed with `[Replying to: <id>]` so the EA knows which message is being referenced — *completed 2026-04-21*
+- **VPS setup:** added image download block to `cos-turn.sh` and stored WhatsApp access token at `/home/agent/memory/whatsapp-token.txt` — photo sending confirmed working end-to-end *completed 2026-04-22*
+- Build a French phone agent — Usman lives in Luxembourg and frequently needs to make calls in French but does not speak the language. The agent should be able to make outbound calls on his behalf, conduct the conversation in French, and report back a summary. Needs research into the right platform (e.g. Bland.ai, Retell.ai, or similar) and integration with the EA so Usman can trigger a call via WhatsApp.
+- Create social media accounts for the EA under its own identity
+- Decide on a process for the EA sending emails on Usman's behalf — what authorization looks like, what guardrails are needed
+- Give the EA access to the Old iPhone as an air-gapped browser for bot-resistant web tasks (flight search, etc.) — see [Ideas/Old-Iphone-Agent](Ideas/Old-Iphone-Agent) for full spec and implementation checklist
 - Idea: progress ping after N minutes on long turns (currently user waits silently)
 - Idea: extra slash commands beyond `/done` (e.g. `/pause`, `/status`)
 - Idea: web UI dashboard once the system is mature
@@ -266,8 +264,11 @@ Old April 14 n8n workflows (three-agent architecture) still active — kept duri
 
 ## Change Log
 
-| Date | Change | Why |
-|------|--------|-----|
-| 2026-04-19 | Renamed from "Chief of Staff" to "EA (Executive Assistant)" | More accurate name for the role |
+
+| Date       | Change                                                                                                         | Why                                                                                                                            |
+| ---------- | -------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| 2026-04-19 | Renamed from "Chief of Staff" to "EA (Executive Assistant)"                                                    | More accurate name for the role                                                                                                |
 | 2026-04-18 | Redesigned to minimal n8n architecture — single long-lived Claude session, n8n reduced to thin messaging layer | Original three-agent design was rigid: same pipeline was overkill for quick questions, no conversation continuity across turns |
-| 2026-04-14 | Initial build — three-agent architecture (Planner → Executor → Reviewer) orchestrated by n8n | First version of the autonomous agent concept |
+| 2026-04-14 | Initial build — three-agent architecture (Planner → Executor → Reviewer) orchestrated by n8n                   | First version of the autonomous agent concept                                                                                  |
+
+
