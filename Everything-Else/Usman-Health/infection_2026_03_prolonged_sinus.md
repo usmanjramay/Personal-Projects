@@ -206,9 +206,23 @@ The four sinus pairs drain to different locations:
 
 ---
 
+## Episode: 2026-04-21
+
+**Symptoms:** General sickness feeling. Teeth aching — mild pain triggered by warm pizza (not cold). General tooth sensitivity without clear thermal trigger. Nasal blockage with audible whistle when breathing.
+
+**Triggers:** Late-night junk food the night before + acute stress from reading architect's letter late at night (housing project anxiety felt physically before sleep).
+
+**Four-hit model:** Hits 1+2 (obesity + ongoing infection) were baseline. Both hit 3 (late-night junk food) and hit 4 (stress/cortisol spike from architect's letter) added simultaneously — same double-trigger pattern as 2026-04-14 episode.
+
+**Notable symptom shift — teeth:** Previous dental pain was cold-triggered (April 12). Today pain is warm-triggered + general aching. Warm food sensitivity is more associated with pulpitis or early abscess than sinus referral (cold sensitivity is more typical for sinus-referred tooth pain). This increases urgency of pending dental evaluation.
+
+**Nasal whistle:** New symptom. Suggests increased mucosal swelling narrowing the nasal passage, possibly from the inflammatory spike overnight. Consistent with deviated septum vulnerability during heightened inflammation.
+
+---
+
 ## Next Steps (Prioritized)
 
 1. **CT sinus scan** — rule in/out deep sinus disease; if clean, confirms gut as primary driver
-2. **Gut workup:** CRP blood test, stool calprotectin, consider SIBO breath test
-3. **Dental evaluation** — right-sided inflammation + tooth pain warrants exam + X-ray
+2. **Dental evaluation** ⬆️ **UPGRADED PRIORITY** — shift from cold sensitivity (April 12) to warm sensitivity + general aching (April 21) is more consistent with pulpitis/abscess than sinus referral; exam + panoramic X-ray needed soon
+3. **Gut workup:** CRP blood test, stool calprotectin, consider SIBO breath test
 4. **Blood panel if above inconclusive:** EBV/CMV serology, CBC, TSH
