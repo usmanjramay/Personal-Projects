@@ -7,17 +7,9 @@
 
 ---
 
-## Research
+## To Be Researched
 
-Key learnings from research so far:
-
-1. **Exploration first.** Before any implementation, there needs to be an exploration run — surveying the problem space, existing solutions, and constraints before committing to a path.
-2. **More conversation upfront.** There is likely meaningful overlap between the exploration/research phase and the user story phase. More back-and-forth with the user before acting reduces wasted work downstream.
-3. **Adversarial reviews add the most value.** Multiple adversarial agents challenging the solution from different angles catches problems early:
-   - One checks whether the requirements from the user story are actually being met.
-   - One checks whether better solutions exist that were missed.
-   - One checks what could go wrong with the proposed solution.
-4. **Dual-source search.** Run the same search once through Gemini or Perplexity and once through Claude, then compare results. This catches blind spots and improves quality — this step is important and should not be skipped.
+- What is the best research skill available these days?
 
 ---
 
@@ -33,34 +25,34 @@ Key learnings from research so far:
 
 ## Process
 
-### Step 1 — User Story
+### Step 1 — Discovery
 
-Before any research or work begins, sharpen the problem through structured questioning. The goal is to get clarity on what the task is actually about and what a good outcome looks like.
+The full discovery phase before any implementation begins. This step has four parts that run in sequence.
+
+#### 1a — Exploration Search
+
+Survey the problem space before committing to a direction. The goal is to understand what already exists, what approaches are available, and what constraints matter.
+
+- Run an exploration pass — survey existing tools, approaches, and prior art
+- Run the same search through Claude and through Gemini or Perplexity separately, then compare the results — note where they diverge
+
+**Output:** A summary of what exists, what looks promising, and what was considered but ruled out.
+
+---
+
+#### 1b — User Story
+
+With exploration complete, sharpen the problem through structured questioning. The goal is to get clarity on what the task is actually about and what a good outcome looks like.
 
 **Skill options to use for this step (try each once and see what works best):**
 - `/first-principles` — Socratic breakdown; good for ambiguous or complex problems
 - `/office-hours` — YC-style challenge mode; good when the idea needs stress-testing
-- No "Grill Me" skill exists yet, but worth adding if the above don't fully serve this step
-- GStack review skills (`/design-review`, `/devex-review`) — likely not the right fit here; they are designed for reviewing built things, not sharpening problem definitions
 
-**Output of this step:** A clear user story with pain points, wish list, and any known constraints — written before any research begins.
+**Output:** A clear user story with pain points, wish list, and any known constraints.
 
 ---
 
-### Step 2 — Research
-
-With the user story defined, run a structured research phase to explore the problem space before committing to a solution.
-
-**How to run this step:**
-1. Run an exploration pass — survey existing tools, approaches, and prior art
-2. Run the same search through Claude and through Gemini or Perplexity separately, then compare the results — note where they diverge
-3. Bring findings back to the user for a short conversation before moving forward; there may be things worth discussing before locking in a direction
-
-**Output of this step:** A summary of what exists, what looks promising, and what was considered but ruled out — plus any open questions for the user.
-
----
-
-### Step 3 — Adversarial Review
+#### 1c — Adversarial Reviews
 
 Before finalizing a direction, run three separate adversarial agents to challenge the proposed solution:
 
@@ -70,41 +62,62 @@ Before finalizing a direction, run three separate adversarial agents to challeng
 | Better solutions | Are there meaningfully better alternatives that were missed or dismissed too quickly? |
 | Risk check | What could go wrong with this solution, and how serious are those risks? |
 
-These can run in parallel. Bring the outputs back to the user before moving to implementation.
+These can run in parallel. Bring the outputs back to the user before moving forward.
 
 ---
 
-### Step 4 — Implementation Plan and Task Breakdown
+#### 1d — Finalize
 
-Once the user story is finalized and the research direction is agreed upon, build a concrete implementation plan.
+Bring all findings — exploration results, user story, and adversarial review outputs — back to the user for a short conversation. Agree on a direction before moving to implementation.
+
+**Output:** A confirmed direction with open questions resolved.
+
+---
+
+### Step 2 — Implementation Plan and Task Breakdown
+
+Once the direction is agreed upon, build a concrete implementation plan.
 
 **Structure:**
 - Break the work into discrete steps that can each be executed and tested independently
 - Each step should be small enough to be handed to a sub-agent with clear inputs and expected outputs
 - Follow the pattern that superpowers uses: each task verifiable before the next one starts
 
-**Output of this step:** A numbered implementation plan with sub-tasks that are independently executable and testable.
+**Output:** A numbered implementation plan with sub-tasks that are independently executable and testable.
 
 ---
 
-### Step 5 — Execution
+### Step 3 — Execution
 
 Execute the implementation plan step by step using sub-agents where appropriate.
 
 - Each sub-task gets its own agent with clear scope
-- After each sub-task completes, verify the result before moving to the next step (see Testing Layer 1 below)
+- After each sub-task completes, verify the result before moving to the next step (see Step 4)
 
 ---
 
-### Step 6 — Testing
+### Step 4 — Testing
 
 Testing happens in two layers:
 
 **Layer 1 — Per-task verification (during execution)**
-After each sub-task in the implementation plan, verify the result is correct before proceeding. This is the same pattern superpowers uses for sub-agent output verification — do not skip it.
+After each sub-task in the implementation plan, verify the result is correct before proceeding. Do not skip this.
 
 **Layer 2 — Final end-to-end check (after all tasks complete)**
 Once all tasks are done, run a full check of the finished system against the wish list from the User Story. For anything with a visual or interactive component, do a manual walkthrough using a clean Chrome profile with no personal accounts logged in — this ensures the test reflects what a real user would experience.
+
+---
+
+### Step 5 — Learnings
+
+After the work is done, document what was learned so future work benefits from it.
+
+- What worked well and should be repeated?
+- What was harder than expected, and why?
+- What would you do differently next time?
+- Any new open questions that surfaced?
+
+**Output:** An update to this file (or the relevant project file) with new learnings added.
 
 ---
 
@@ -113,3 +126,4 @@ Once all tasks are done, run a full check of the finished system against the wis
 | Date | Change | Why |
 |------|--------|-----|
 | 2026-04-25 | File created | Documenting the AI agent workflow process based on initial research |
+| 2026-04-25 | Restructured process: merged discovery into Step 1 (4 subsections), renumbered steps, added Step 5 Learnings | Consolidating user story, research, and adversarial review under one discovery phase |
