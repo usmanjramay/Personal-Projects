@@ -18,27 +18,29 @@
 
 ## Decisions and Reasoning
 
-### 1. Should I switch from Business Standard to a personal plan now?
+### 1. Personal plan vs. Workspace — which is the right type of account?
 
-**Decision: No — not worth it at the moment.**
+**Decision: Workspace is required. Personal plans are ruled out.**
 
-- Business Standard is €15/month. Google One Premium is €10/month. That's a €5/month saving, but migrating everything is significant hassle for minimal gain.
-- The only meaningful thing missing on personal plans is the custom domain email (usman@experimentoflife.org) — but Hostinger already provides free email with the domain, so this isn't actually needed.
-- All other Workspace "advantages" (shared drives, admin controls, etc.) don't apply since it's just one person.
-- Staying put makes sense until there's a specific reason to move.
+- "Take notes for me" (AI meeting notes) is **not available on any personal Google plan** — confirmed via Google's own documentation (see References).
+- Google One Premium and Google AI Pro have identical Google Meet features — neither includes meeting notes or transcription.
+- Since meeting notes are a hard requirement, personal plans are not a viable option regardless of price.
+- **Workspace Business Standard (€15/month) is the only current plan that covers everything needed**: longer Meet calls, calendar booking pages, meeting notes, transcription, and recording.
 
-### 2. If I ever want to upgrade (more AI, more storage) — which plan?
+### 2. The only remaining question: which account should hold the Workspace subscription?
 
-**Decision: Personal AI Pro (€20/month) is the clear winner.**
+Currently linked to experimentoflife@gmail.com. Two options:
 
-- Business Standard + AI expanded access add-on = €15 + €14 = **€29/month**
-- Personal AI Pro = **€20/month**, with 5 TB storage (vs. 2 TB) and a $10/month developer API credit
-- If the dev credit is used, AI Pro is effectively ~€11/month — cheaper than the current Business Standard
-- No reason to go the Workspace add-on route
+- **Keep it on experimentoflife@gmail.com** — no action needed, status quo
+- **Move it to usmanramay@gmail.com** — apparently unlocks **$300 in Claude AI credits**; worth investigating what conditions apply and whether the offer is still active
 
-### 3. If staying on Workspace — should it be tied to usmanramay@gmail.com?
+No other meaningful differences between the two accounts for Workspace purposes.
 
-Currently linked to experimentoflife@gmail.com. Moving the Workspace subscription to usmanramay@gmail.com apparently unlocks **$300 in Claude AI credits**. Worth investigating if a Workspace migration ever happens anyway.
+### 3. What if I want to upgrade to better AI in the future?
+
+- Business Standard + AI expanded access add-on = €15 + €14 = **€29/month** — expensive, and still no developer API credit
+- There is no personal plan equivalent that also includes meeting notes
+- The upgrade path is constrained to Workspace tiers — personal AI Pro is off the table unless meeting notes become available on personal plans in the future
 
 ---
 
@@ -46,53 +48,49 @@ Currently linked to experimentoflife@gmail.com. Moving the Workspace subscriptio
 
 ### Personal Google Plans
 
-| Plan | Price | Storage | AI / Gemini | Longer Meet calls | Calendar booking | Meet notes/recording | Dev API credit | Ruled out? |
-|------|-------|---------|-------------|-------------------|------------------|----------------------|----------------|------------|
-| Google AI Plus | €8/month | 200 GB | Similar to Business Standard (assumed) | No | No | Unknown | No | Yes — no longer Meet calls |
-| Google One Premium | €10/month | 2 TB | Good tier | Yes | Yes | Yes | No | No |
-| Google AI Pro | €20/month | 5 TB | Full, highest tier | Yes | Yes | Yes | $10/month | No |
+_Note: All personal plans have identical Google Meet features. None include meeting notes ("Take notes for me") or transcription. This rules out personal plans entirely for this use case._
+
+| Plan | Price | Storage | AI / Gemini | Longer Meet calls | Calendar booking | Meet notes/transcription | Dev API credit | Ruled out? |
+|------|-------|---------|-------------|-------------------|------------------|--------------------------|----------------|------------|
+| Google AI Plus | €8/month | 200 GB | Similar to Business Standard (assumed) | No | No | No | No | Yes — no longer Meet, no notes |
+| Google One Premium | €10/month | 2 TB | Good tier | Yes | Yes | **No** | No | Yes — no meeting notes |
+| Google AI Pro | €20/month | 5 TB | Full, highest tier | Yes | Yes | **No** | $10/month | Yes — no meeting notes |
+
+See: https://one.google.com/about/#compare-plans and https://support.google.com/meet/answer/10459644?hl=en
 
 ### Google Workspace Plans
 
-| Plan | Price | Storage | AI / Gemini | Longer Meet calls | Calendar booking | Meet notes/recording | Dev API credit | Ruled out? |
-|------|-------|---------|-------------|-------------------|------------------|----------------------|----------------|------------|
-| Business Starter | €7/month | 30 GB | Basic | Yes | No | No (no notes, transcription, or recording) | No | Yes — no notes/recording |
-| Business Standard (current) | €15/month | 2 TB | Better than personal base; not equivalent to AI Pro | Yes | Yes | Yes | No | No |
-| Business Standard + AI expanded access | €29/month (€15 + €14) | 2 TB | Roughly equivalent to AI Pro | Yes | Yes | Yes | No | Effectively yes — too expensive vs AI Pro |
-
-### Side-by-Side: Realistic Options
-
-_Ruling out: Google AI Plus (no longer meetings), Business Starter (no notes/recording/transcription), Business Standard + add-on (€29 vs €20 with worse storage and no dev credit)._
-
-| Factor | Google One Premium | Google AI Pro | Business Standard (current) |
-|--------|--------------------|---------------|-----------------------------|
-| Monthly cost | €10 | €20 | €15 |
-| Effective cost (if dev credit used) | €10 | ~€11 | €15 |
-| Storage | 2 TB | 5 TB | 2 TB |
-| AI/Gemini level | Good | Full, highest | Better than base; not AI Pro level |
-| Longer Meet calls | Yes | Yes | Yes |
-| Calendar booking | Yes | Yes | Yes |
-| Meet notes, transcription, recording | Yes | Yes | Yes |
-| Developer API credit | No | $10/month | No |
-| Custom domain email | No | No | Yes (via Hostinger anyway — not needed) |
-| Verdict | Cheap upgrade path if migrating | Best value if upgrading — dev credit makes it ~€11 effective | **Current plan — staying put for now** |
+| Plan | Price | Storage | AI / Gemini | Longer Meet calls | Calendar booking | Meet notes/transcription/recording | Dev API credit | Ruled out? |
+|------|-------|---------|-------------|-------------------|------------------|------------------------------------|----------------|------------|
+| Business Starter | €7/month | 30 GB | Basic | Yes | No | No | No | Yes — no notes/recording, no booking |
+| Business Standard (current) | €15/month | 2 TB | Better than personal base | Yes | Yes | Yes | No | No — current plan |
+| Business Standard + AI expanded access | €29/month (€15 + €14) | 2 TB | Roughly equivalent to AI Pro | Yes | Yes | Yes | No | Effectively yes — very expensive |
 
 ---
 
 ## Current Status
 
-- Currently on Workspace Business Standard (€15/month) — staying put, no migration planned
-- If upgrading in the future: personal Google AI Pro (€20/month) is the target — better value than Business Standard + AI expanded access add-on (€29/month)
-- Custom domain email (usman@experimentoflife.org) is not a blocker for switching — Hostinger provides free email with the domain
+- On Workspace Business Standard (€15/month) — staying on this plan; it is the only option that meets all requirements
+- Personal plans ruled out: meeting notes not available on any personal Google plan
+- Only open question: whether to move the Workspace subscription from experimentoflife@gmail.com to usmanramay@gmail.com for $300 Claude credits
 
 ---
 
 ## Open Tasks and Ideas
 
-- [ ] Confirm whether Google AI Plus includes Meet notes/recording (unknown — but plan is ruled out anyway)
 - [ ] Verify the $300 Claude credits offer for moving Workspace to usmanramay@gmail.com — confirm it's still active and what conditions apply
-- Idea: If/when upgrading, migrate to personal Google AI Pro — revisit when AI usage increases enough to justify the cost
-- Idea: If EoL ever adds team members, Workspace becomes clearly the right choice — factor this into the decision at that time
+- Idea: If Google ever adds meeting notes to personal plans, revisit AI Pro as an upgrade path — it would be significantly cheaper
+- Idea: If EoL ever adds team members, Workspace becomes even more clearly the right choice
+
+---
+
+## References
+
+| Resource | URL | What it shows |
+|----------|-----|---------------|
+| Google Meet features by plan | https://support.google.com/meet/answer/10459644?hl=en | Which Meet features (recording, notes, transcription, etc.) are available per plan |
+| "Take notes for me" availability | https://support.google.com/docs/answer/13952129?sjid=5146736346178396468-NA#zippy=%2Cgoogle-meet | Confirms meeting notes are not available on personal AI Pro |
+| Google One personal plans comparison | https://one.google.com/about/#compare-plans | Full feature breakdown for all personal Google plans |
 
 ---
 
@@ -100,5 +98,6 @@ _Ruling out: Google AI Plus (no longer meetings), Business Starter (no notes/rec
 
 | Date | Change | Why |
 |------|--------|-----|
-| 2026-04-25 | Finalized plan comparison and decisions | Confirmed Business Standard = €15; AI expanded access add-on = €14 (total €29); Business Starter ruled out (no notes/recording); personal plans only missing custom domain email (moot — Hostinger covers it); decided to stay on Business Standard for now, switch to AI Pro if ever upgrading |
+| 2026-04-25 | Major reversal — personal plans ruled out entirely | Discovered that meeting notes ("Take notes for me") are not available on any personal Google plan; Workspace is the only option |
+| 2026-04-25 | Finalized plan comparison and decisions | Confirmed Business Standard = €15; AI expanded access add-on = €14 (total €29); Business Starter ruled out (no notes/recording); previously assumed personal plans were viable |
 | 2026-04-25 | File created | Captured account structure and plan comparison after research session |
