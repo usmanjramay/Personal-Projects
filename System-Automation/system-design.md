@@ -23,7 +23,23 @@
 
 ---
 
-## Process
+## System Processes
+
+Capabilities that support the work across all projects — not tied to a specific phase or workflow.
+
+### Quick Notes
+
+For fast capture without wasting tokens: use a bash append command to write to `~/.claude/quick-notes.md` without reading the file first. This is the standard process documented in the global [`CLAUDE.md`](~/.claude/CLAUDE.md). Do not use the Read tool before appending, and do not use the Second Brain MCP for quick captures.
+
+### Review and Learn
+
+The `/review-n-learn` skill reviews any session to extract improvement ideas and update the system. Run it before closing or compacting a chat where something felt worth capturing — it works from in-session context at zero extra cost.
+
+Skill file: [`~/.claude/skills/review-n-learn/SKILL.md`](~/.claude/skills/review-n-learn/SKILL.md)
+
+---
+
+## New Feature Process
 
 ### Step 1 — User Story
 
@@ -101,19 +117,6 @@ Once all tasks are done, run a full check of the finished system against the wis
 
 ---
 
-### Step 6 — Wrapup
-
-After the work is done, document what was learned so future work benefits from it.
-
-- What worked well and should be repeated?
-- What was harder than expected, and why?
-- What would you do differently next time?
-- Any new open questions that surfaced?
-
-**Output:** An update to this file (or the relevant project file) with new learnings added.
-
----
-
 ## Document Structure
 
 Each project or feature produces a set of documents that correspond to the process steps. Five document types are used:
@@ -133,6 +136,7 @@ Each project or feature produces a set of documents that correspond to the proce
 
 | Date | Change | Why |
 |------|--------|-----|
+| 2026-04-26 | Added System Processes section; renamed process to New Feature Process; removed Step 6 (Wrapup) | Wrapup is on-demand, not a fixed step; Quick Notes and Review and Learn are system-wide capabilities, not feature-specific |
 | 2026-04-26 | Change Log file updated to specify Change-Log/ subfolder | Corrected location after user moved first change log to subfolder |
 | 2026-04-26 | Added /review-n-learn skill to system | Need a standard way to extract learnings from sessions and convert to system improvements |
 | 2026-04-26 | Added Change Log file as document type 6 | First change log file created; needed a category in the document structure table |

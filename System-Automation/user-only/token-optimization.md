@@ -1,6 +1,6 @@
 # Token Optimization — Claude Code
 
-**Last updated:** 2026-04-25
+**Last updated:** 2026-04-26
 
 > Reference for understanding where tokens are spent in Claude Code and how to reduce unnecessary cost.
 
@@ -54,12 +54,24 @@ When reviewing a conversation from in-session context, message content is fully 
 
 **Also note:** If `/compact` has been run, in-session context no longer contains the full message history — only the compact summary. At that point, the JSONL is the only way to recover the detailed session content.
 
+**Recommended practice:** Before running `/compact` or closing a chat where something felt worth capturing, run the `/review-n-learn` skill first. This extracts learnings while the full conversation is still in context — the cheapest possible moment to do it.
+
+---
+
+### 7. Compaction does not affect JSONL session files on disk
+
+When compaction runs, it rewrites the in-session context — but the JSONL file on disk (`~/.claude/projects/[project-hash]/[session-id].jsonl`) is not modified. The full message history, including timestamps, is always preserved in the JSONL regardless of whether compaction has run. No context is permanently lost from disk.
+
+### 8. Bash append is the most token-efficient way to take quick notes
+
+The most token-efficient note-taking method is a bash append command — no file read required. This avoids loading the file contents into context before writing.
+
+The file in use is `~/.claude/quick-notes.md`. This is documented in the global CLAUDE.md (`~/.claude/CLAUDE.md`) as the standard process: *"When asked to take a note, append it to `~/.claude/quick-notes.md` without reading the file first."*
+
+Do not use the Read tool before appending, and do not use the Second Brain MCP for quick captures — those paths cost more tokens for no added benefit.
+
 ---
 
 ## Open Questions
 
-1. **Does compaction impact the session summary recorded in local files?** If compaction rewrites the conversation, does it affect what gets saved to disk — and is any context permanently lost?
-
-2. **What is the most token-efficient way to take quick notes?** Can Claude append to a file without reading the full file first, or is it better to use the Second Brain MCP for this? The Read tool default of 2000 lines may make file-appending expensive for longer files.
-
-3. **What is the benefit of using custom agents over custom skills?** For example, if a skill can guide Claude through a task, when would a custom agent be preferable — and does that have a different token profile?
+1. **What is the benefit of using custom agents over custom skills?** For example, if a skill can guide Claude through a task, when would a custom agent be preferable — and does that have a different token profile?
