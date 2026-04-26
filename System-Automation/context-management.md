@@ -17,6 +17,8 @@ The goal of context management is for Claude to always have the right context fo
 
 Each project or feature produces a set of documents that correspond to the New Feature Process steps. See [system-design.md](system-design.md) for the process.
 
+Each feature gets its own subfolder. The user story, research, design, implementation plan, and feature documents for that feature all live in that subfolder. Only the **system document** and the **feature document** are live documents — they evolve over time. The others are created once and should not generally change after that.
+
 | # | Document | Created by | Purpose |
 |---|----------|------------|---------|
 | 1 | **System document** | Usman (manually) | High-level reference for how a system works — architecture, design decisions, and ongoing learnings. |
@@ -31,16 +33,6 @@ Each project or feature produces a set of documents that correspond to the New F
 
 ## Writing Markdown Files
 
-### Key Principles
-
-- **Status at the top, always.** Anyone opening this file should know the current state in 5 seconds.
-- **Living document, not a snapshot.** Update in place. Git history covers the archive.
-- **Include all relevant details.** Do not miss any technical details that may leave a gap in understanding.
-- **One file per system.** Don't split unless the file genuinely outgrows 2000 lines.
-- **Change log = major decisions only.** Small edits belong in git history, not here.
-- **Wish List = success criteria.** Write it as outcomes that will be true when done, not as tasks.
-- **Critical Assumptions are optional.** Only add them when a change in the assumption would require updating this doc or the system.
-
 ### Formatting Rules
 
 - Single H1 (`#`) — document title only
@@ -49,38 +41,28 @@ Each project or feature produces a set of documents that correspond to the New F
 - Code blocks with language tags (` ```bash `, ` ```json `)
 - No raw HTML — pure Markdown parses more reliably
 - Consistent heading names — don't rename sections across edits
+- **Headers are especially important** — Claude locates a section by grepping for its heading, then reads just those lines. Clear, consistent headers make targeted reads efficient.
+
+### Key Principles
+
+**All files:**
+
+- Open with a brief context summary — one or two sentences on what this file is and why it exists.
+- Follow with two metadata lines: **Document type** and **Last updated**.
+
+**Live files (system documents and feature documents) only:**
+
+- Include an **Open Items** section with a numbered list of outstanding tasks, questions, or decisions.
+- Include a **Critical Assumptions** section only when the system or feature depends on something external that could change and would require updating this file if it did.
+- Include a **Section Map** near the top listing each section and its approximate line number, so Claude can navigate without reading the full file first.
+- Include a **Change Log** at the end — major changes only. Small corrections belong in git history. When a Change Log file in `Change-Log/` is relevant to this system or feature, reference it from this section.
 
 ### How Claude Reads Files
 
-**Claude reads reactively, not predictively.** It cannot inspect file size before reading. It calls the Read tool with default parameters, receives the content, and then decides what to do next.
+**Claude can read specific line ranges.** The Read tool accepts `offset` (start line) and `limit` (number of lines), so only the relevant slice of a file needs to be loaded. The standard pattern is:
 
-- **Under 2000 lines** → Claude reads the entire file in one call. A Section Map provides zero reading efficiency benefit.
-- **Over 2000 lines** → Claude reads lines 1–2000, sees truncation, and may request more using `offset`. A Section Map at the top IS useful here.
+1. **Grep to locate** — run `grep -n "<heading or keyword>" <file>` to find the exact line number.
+2. **Read the slice** — call Read with `offset` set to just before that line.
+3. **Edit precisely** — make the targeted change without loading the rest of the file.
 
-**Section Map guidance by file length:**
-
-| File length | Section Map | Action |
-|-------------|-------------|--------|
-| Under 300 lines | Not needed | No special action |
-| 300–2000 lines | Recommended | Helps Claude navigate conceptually |
-| Over 2000 lines | Required | Enables efficient partial reads |
-| Over 500 lines | — | Consider splitting into multiple files |
-
-### Critical Assumptions (when to include in a doc)
-
-Only add a Critical Assumptions section to a doc when:
-- The doc or the system it describes depends on something external that could change
-- A change in that assumption would require someone to update this file or the system
-
-Include "Last reviewed: YYYY-MM-DD" so it's clear when the assumptions were last verified.
-
-**Assumptions for `markdown-file-structure.md` specifically:**
-
-_Last reviewed: 2026-04-19_
-
-| Assumption | Value | If this changes... |
-|------------|-------|--------------------|
-| Claude Code Read tool default line limit | 2000 lines | Re-evaluate Section Map threshold |
-| `@filename` syntax followed in regular .md files | Yes, on demand | Re-evaluate cross-referencing approach |
-| Claude Code version | April 2026 (claude-sonnet-4-6) | Re-verify reading mechanics |
-| File format | Plain Markdown (.md) | Different formats may parse differently |
+This is why consistent headers matter: they are what grep matches on. Live documents (system and feature documents) should include a **Section Map** near the top so Claude can navigate directly to any section without a grep step.
