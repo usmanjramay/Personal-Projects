@@ -1,20 +1,7 @@
 # Markdown File Structure — Reference & Template
 
 _Use this when creating any new living reference document._
-**Last updated:** 2026-04-19
-
----
-
-## Critical Assumptions
-
-_Last reviewed: 2026-04-19_
-
-| Assumption | Value | If this changes... |
-|------------|-------|--------------------|
-| Claude Code Read tool default line limit | 2000 lines | Re-evaluate Section Map threshold |
-| `@filename` syntax followed in regular .md files | Yes, on demand | Re-evaluate cross-referencing approach |
-| Claude Code version | April 2026 (claude-sonnet-4-6) | Re-verify reading mechanics |
-| File format | Plain Markdown (.md) | Different formats may parse differently |
+**Last updated:** 2026-04-26
 
 ---
 
@@ -58,24 +45,6 @@ For VPS access details, see @remote_vps.md.
 - Place references inline — not in a separate "See also" section at the bottom
 - Claude does NOT auto-discover relationships — you must reference files explicitly
 - Don't over-reference: only link files Claude would genuinely need for the current task
-
----
-
-## How Claude Reads Files
-
-**Claude reads reactively, not predictively.** It cannot inspect file size before reading. It calls the Read tool with default parameters, receives the content, and then decides what to do next.
-
-- **Under 2000 lines** → Claude reads the entire file in one call. A Section Map provides zero reading efficiency benefit.
-- **Over 2000 lines** → Claude reads lines 1–2000, sees truncation, and may request more using `offset`. A Section Map at the top IS useful here.
-
-**Section Map guidance by file length:**
-
-| File length | Section Map | Action |
-|-------------|-------------|--------|
-| Under 300 lines | Not needed | No special action |
-| 300–2000 lines | Recommended | Helps Claude navigate conceptually |
-| Over 2000 lines | Required | Enables efficient partial reads |
-| Over 500 lines | — | Consider splitting into multiple files |
 
 ---
 
