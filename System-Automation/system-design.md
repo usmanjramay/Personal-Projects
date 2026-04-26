@@ -25,22 +25,7 @@
 
 ## Process
 
-### Step 1 — Discovery
-
-The full discovery phase before any implementation begins. This step has four parts that run in sequence.
-
-#### 1a — Exploration Search
-
-Survey the problem space before committing to a direction. The goal is to understand what already exists, what approaches are available, and what constraints matter.
-
-- Run an exploration pass — survey existing tools, approaches, and prior art
-- Run the same search through Claude and through Gemini or Perplexity separately, then compare the results — note where they diverge
-
-**Output:** A summary of what exists, what looks promising, and what was considered but ruled out.
-
----
-
-#### 1b — User Story
+### Step 1 — User Story
 
 With exploration complete, sharpen the problem through structured questioning. The goal is to get clarity on what the task is actually about and what a good outcome looks like.
 
@@ -52,7 +37,22 @@ With exploration complete, sharpen the problem through structured questioning. T
 
 ---
 
-#### 1c — Adversarial Reviews
+### Step 2 — Research
+
+The full research phase before any implementation begins. This step has three parts that run in sequence.
+
+#### 2a — Exploration Search
+
+Survey the problem space before committing to a direction. The goal is to understand what already exists, what approaches are available, and what constraints matter.
+
+- Run an exploration pass — survey existing tools, approaches, and prior art
+- Run the same search through Claude and through Gemini or Perplexity separately, then compare the results — note where they diverge
+
+**Output:** A summary of what exists, what looks promising, and what was considered but ruled out.
+
+---
+
+#### 2b — Adversarial Reviews
 
 Before finalizing a direction, run three separate adversarial agents to challenge the proposed solution:
 
@@ -66,7 +66,7 @@ These can run in parallel. Bring the outputs back to the user before moving forw
 
 ---
 
-#### 1d — Finalize
+#### 2c — Finalize
 
 Bring all findings — exploration results, user story, and adversarial review outputs — back to the user for a short conversation. Agree on a direction before moving to implementation.
 
@@ -74,7 +74,7 @@ Bring all findings — exploration results, user story, and adversarial review o
 
 ---
 
-### Step 2 — Implementation Plan and Task Breakdown
+### Step 3 — Implementation Plan and Task Breakdown
 
 Once the direction is agreed upon, build a concrete implementation plan.
 
@@ -87,16 +87,16 @@ Once the direction is agreed upon, build a concrete implementation plan.
 
 ---
 
-### Step 3 — Execution
+### Step 4 — Execution
 
 Execute the implementation plan step by step using sub-agents where appropriate.
 
 - Each sub-task gets its own agent with clear scope
-- After each sub-task completes, verify the result before moving to the next step (see Step 4)
+- After each sub-task completes, verify the result before moving to the next step (see Step 5)
 
 ---
 
-### Step 4 — Testing
+### Step 5 — Testing
 
 Testing happens in two layers:
 
@@ -108,7 +108,7 @@ Once all tasks are done, run a full check of the finished system against the wis
 
 ---
 
-### Step 5 — Learnings
+### Step 6 — Learnings
 
 After the work is done, document what was learned so future work benefits from it.
 
@@ -127,3 +127,4 @@ After the work is done, document what was learned so future work benefits from i
 |------|--------|-----|
 | 2026-04-25 | File created | Documenting the AI agent workflow process based on initial research |
 | 2026-04-25 | Restructured process: merged discovery into Step 1 (4 subsections), renumbered steps, added Step 5 Learnings | Consolidating user story, research, and adversarial review under one discovery phase |
+| 2026-04-26 | Separated User Story into its own Step 1; renamed remaining discovery steps to Step 2 — Research (2a–2c); renumbered all subsequent steps | Making the user story an explicit first step before research begins |
