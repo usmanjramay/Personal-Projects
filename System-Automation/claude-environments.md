@@ -1,9 +1,23 @@
-# Claude Code Web Sessions
+# Claude Environments & Configuration
 
 **Status:** Testing
 **Last updated:** 2026-04-26
 
-> Reference for how Claude Code web sessions are configured and what still needs to be done to run them reliably across projects.
+> Reference for how Claude Code environments are configured and what still needs to be done to run them reliably across projects.
+
+---
+
+## Permission Settings
+
+All Claude Code permissions are managed centrally in `~/.claude/settings.json`. This is the single source of truth for:
+
+- Tool allow/deny rules (Bash, Read, Edit, MCP servers, etc.)
+- Additional directories Claude can browse
+- Permission default mode per project
+
+**All local `settings.local.json` files across every project have been wiped to `{}`** — Personal-Projects, System-Automation, and EoL-Context. Any future permission changes should be made to `~/.claude/settings.json` and tracked in this file's change log below.
+
+The one exception is project-level `settings.json` files (not local), which set `defaultMode: auto` — this is intentional and stays per-project since it applies to web sessions too.
 
 ---
 
@@ -91,4 +105,5 @@ Tracked in: GitHub Issue #48963
 
 | Date | Change | Why |
 |------|--------|-----|
-| 2026-04-26 | File created | Document web session configuration after initial setup |
+| 2026-04-26 | File created as web-sessions.md | Document web session configuration after initial setup |
+| 2026-04-26 | Renamed to claude-environments.md; added Permission Settings section | Broadened scope to cover all Claude config; centralized all permissions to ~/.claude/settings.json |
