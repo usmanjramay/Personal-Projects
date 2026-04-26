@@ -7,20 +7,15 @@
 
 ---
 
-## To Be Researched
+## Open Items
 
-- What is the best research skill available these days?
-
----
-
-## Open Tasks and Ideas
-
-- [ ] Decide which skill works best for the User Story step (first-principles, office-hours, or another) — run each once and compare
-- [ ] Test the dual-source search workflow (Claude vs. Gemini/Perplexity) on a real task and document what differences emerge
-- [ ] Explore setting up a clean Chrome profile (no personal accounts) for final visual testing
-- [ ] Define what "adversarial review" prompts look like in practice — write reusable templates for each type
-- Idea: consider whether the adversarial review agents should run in parallel or sequentially
-- [ ] **VS Code extension ignores `~/.claude/settings.json` allowlists (confirmed bug)** — the extension has its own permission layer that always prompts, regardless of what's in the allowlist. Two options: (A) enable `claudeCode.allowDangerouslySkipPermissions: true` + `claudeCode.initialPermissionMode: bypassPermissions` in VS Code settings — blunt but works; or (B) use the `claude` CLI in the integrated terminal with `/ide` to reconnect the diff viewer — granular and fully respects the allowlist. Multiple open GitHub issues; no fix yet as of April 2026.
+1. [ ] What is the best research skill available these days?
+2. [ ] Decide which skill works best for the User Story step (first-principles, office-hours, or another) — run each once and compare
+3. [ ] Test the dual-source search workflow (Claude vs. Gemini/Perplexity) on a real task and document what differences emerge
+4. [ ] Explore setting up a clean Chrome profile (no personal accounts) for final visual testing
+5. [ ] Define what "adversarial review" prompts look like in practice — write reusable templates for each type
+6. [ ] Consider whether the adversarial review agents should run in parallel or sequentially
+7. [ ] **VS Code extension ignores `~/.claude/settings.json` allowlists (confirmed bug)** — the extension has its own permission layer that always prompts, regardless of what's in the allowlist. Two options: (A) enable `claudeCode.allowDangerouslySkipPermissions: true` + `claudeCode.initialPermissionMode: bypassPermissions` in VS Code settings — blunt but works; or (B) use the `claude` CLI in the integrated terminal with `/ide` to reconnect the diff viewer — granular and fully respects the allowlist. Multiple open GitHub issues; no fix yet as of April 2026.
 
 ---
 
@@ -44,92 +39,31 @@ Skill file: [`~/.claude/skills/review-n-learn/SKILL.md`](~/.claude/skills/review
 
 ### Step 1 — User Story
 
-With exploration complete, sharpen the problem through structured questioning. The goal is to get clarity on what the task is actually about and what a good outcome looks like.
-
-**Skill options to use for this step (try each once and see what works best):**
-- `/first-principles` — Socratic breakdown; good for ambiguous or complex problems
-- `/office-hours` — YC-style challenge mode; good when the idea needs stress-testing
-
-**Output:** A clear user story with pain points, wish list, and any known constraints.
+Get clarity on what the task is actually about and what a good outcome looks like. Covered by the `/generate-story` skill. Output: a User Story document.
 
 ---
 
 ### Step 2 — Research
 
-The full research phase before any implementation begins. This step has three parts that run in sequence.
-
-#### 2a — Exploration Search
-
-Survey the problem space before committing to a direction. The goal is to understand what already exists, what approaches are available, and what constraints matter.
-
-- Run an exploration pass — survey existing tools, approaches, and prior art
-- Run the same search through Claude and through Gemini or Perplexity separately, then compare the results — note where they diverge
-
-**Output:** A summary of what exists, what looks promising, and what was considered but ruled out.
-
----
-
-#### 2b — Adversarial Reviews
-
-Before finalizing a direction, run three separate adversarial agents to challenge the proposed solution:
-
-| Agent | Question it answers |
-|-------|---------------------|
-| Requirements check | Are all the requirements from the user story actually being met by this solution? |
-| Better solutions | Are there meaningfully better alternatives that were missed or dismissed too quickly? |
-| Risk check | What could go wrong with this solution, and how serious are those risks? |
-
-These can run in parallel. Bring the outputs back to the user before moving forward.
-
----
-
-#### 2c — Finalize
-
-Bring all findings — exploration results, user story, and adversarial review outputs — back to the user for a short conversation. Agree on a direction before moving to implementation.
-
-**Output:** A confirmed direction with open questions resolved.
+Survey the problem space, research available tools and approaches, then run adversarial reviews to stress-test the options before agreeing a direction. Covered by the `/solution-research` skill. Output: a Design document.
 
 ---
 
 ### Step 3 — Implementation Plan
 
-Once the direction is agreed upon, build a concrete implementation plan with task breakdown.
-
-**Structure:**
-- Break the work into discrete steps that can each be executed and tested independently
-- Each step should be small enough to be handed to a sub-agent with clear inputs and expected outputs
-- Follow the pattern that superpowers uses: each task verifiable before the next one starts. After each sub-task in the implementation plan, verify the result is correct before proceeding. Do not skip this.
-
-**Output:** A numbered implementation plan with sub-tasks that are independently executable and testable.
+Break the agreed direction into discrete, independently testable tasks. Currently using the `superpowers:brainstorming` skill. Output: an Implementation Plan document.
 
 ---
 
 ### Step 4 — Execution
 
-Execute the implementation plan step by step using sub-agents where appropriate.
-
-- Each sub-task gets its own agent with clear scope
-- After each sub-task completes, verify the result before moving to the next step (see Step 5)
+Execute the implementation plan step by step, verifying each task before moving to the next. Currently using the `superpowers:executing-plans` skill.
 
 ---
 
 ### Step 5 — Testing
-Once all tasks are done, run a full check of the finished system against the wish list from the User Story. For anything with a visual or interactive component, do a manual walkthrough using a clean Chrome profile with no personal accounts logged in — this ensures the test reflects what a real user would experience.
 
----
-
-## Document Structure
-
-Each project or feature produces a set of documents that correspond to the process steps. Five document types are used:
-
-| # | Document | Created in | Purpose |
-|---|----------|------------|---------|
-| 1 | **System document** | — | High-level reference for how a system works — architecture, design decisions, and ongoing learnings. This file is an example. |
-| 2 | **User story document** | Step 1 | Captures the problem, pain points, wish list, and constraints agreed on with the user before any work begins. |
-| 3 | **Design document** | Step 2 | Records what was found during research — options explored, alternatives considered, adversarial review outputs, and the agreed direction. |
-| 4 | **Implementation plan document** | Step 3 | The numbered task breakdown used to execute the work — each task independently executable and testable. |
-| 5 | **Feature document** | Step 6 | Post-ship summary of what was built, what was learned, and any open questions for future work. |
-| 6 | **Change Log file** | As needed | Records changes made to skills, tools, or processes — what changed, why, and when. Saved in `Change-Log/` subfolder. Named: `YYYY-MM-DD-[Thing-Changed]-[brief-description].md`. |
+Full check of the finished system against the wish list from the User Story. *Still in progress — no standardized skill yet.*
 
 ---
 
