@@ -27,11 +27,19 @@ Capabilities that support the work across all projects — not tied to a specifi
 
 For fast capture without wasting tokens: use a bash append command to write to `~/.claude/quick-notes.md` without reading the file first. This is the standard process documented in the global [`CLAUDE.md`](~/.claude/CLAUDE.md). Do not use the Read tool before appending, and do not use the Second Brain MCP for quick captures.
 
-### Review and Learn
+### Self-Improvement
 
 The `/review-n-learn` skill reviews any session to extract improvement ideas and update the system. Run it before closing or compacting a chat where something felt worth capturing — it works from in-session context at zero extra cost.
 
 Skill file: [`~/.claude/skills/review-n-learn/SKILL.md`](~/.claude/skills/review-n-learn/SKILL.md)
+
+### Automation
+
+All n8n automation workflows are managed through the `n8n-automation-skill`, which is global and has its own self-improvement loop. More details on how Claude Code runs across different environments (VS Code, web, CLI) and what's available in each are covered in [`claude-environments.md`](claude-environments.md).
+
+### Context Management
+
+How Claude Code context files are structured — what lives globally vs. per-project, how documents are organized, and the principles behind those decisions. Covered in [`context-management.md`](context-management.md).
 
 ---
 
