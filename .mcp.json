@@ -1,0 +1,15 @@
+{
+  "mcpServers": {
+    "my-second-brain": {
+      "type": "http",
+      "url": "https://waeijzskhboqphxjscah.supabase.co/functions/v1/second-brain-mcp?key=${SUPABASE_ANON_KEY}"
+    },
+    "n8n-mcp": {
+      "type": "http",
+      "url": "https://n8n.srv1016866.hstgr.cloud/mcp-server/http",
+      "headers": {
+        "Authorization": "Bearer ${N8N_ACCESS_TOKEN}"
+      }
+    }
+  }
+}
