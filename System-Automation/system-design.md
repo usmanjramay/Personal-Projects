@@ -37,6 +37,11 @@ Skill file: [`~/.claude/skills/review-n-learn/SKILL.md`](~/.claude/skills/review
 
 All n8n automation workflows are managed through the `n8n-automation-skill`, which is global and has its own self-improvement loop. More details on how Claude Code runs across different environments (VS Code, web, CLI) and what's available in each are covered in [`claude-environments.md`](claude-environments.md).
 
+### Git Workflow
+
+- **`git pull`** on session start → configured as a SessionStart hook in `settings.json`. Runs automatically — hooks are more reliable than a CLAUDE.md rule.
+- **`git push`** after approved changes → rule in global `CLAUDE.md`. Done at end of task, not automatically, to preserve a review checkpoint. Auto-push via hook was rejected: risk of pushing untested changes.
+
 ### Context Management
 
 How Claude Code context files are structured — what lives globally vs. per-project, how documents are organized, and the principles behind those decisions. Covered in [`context-management.md`](context-management.md).
