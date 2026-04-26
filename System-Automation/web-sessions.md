@@ -68,6 +68,18 @@ No GitHub Actions or CI workflows are needed. Since there are no required checks
 
 ---
 
+## Known Limitations
+
+### Desktop App: Skills Not Showing in Slash Command Menu
+
+The Desktop App (v2.1.110+) has a known regression where plugin/local skills don't appear in the `/` menu — only a handful of outdated ones show up. Root cause: Desktop App uses a registry-based discovery system, not a direct filesystem scan like the VS Code extension. Skills still *load* at runtime if you type the exact name, but they won't appear in the dropdown.
+
+**Workaround:** Use the VS Code/Cursor extension for Claude Code work — skills work correctly there.
+
+Tracked in: GitHub Issue #48963
+
+---
+
 ## Open Items
 
 - [ ] Add `.mcp.json` to the `EoL-Context` repo so web sessions there have the same MCP access as Personal-Projects.
