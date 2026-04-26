@@ -46,6 +46,16 @@ MCP tools and system tools marked as deferred load only their names into context
 
 ---
 
+### 6. In-session context does not include timestamps
+
+When reviewing a conversation from in-session context, message content is fully available — but timestamps are not. Timestamps only exist in the JSONL session file on disk (`~/.claude/projects/[project-hash]/[session-id].jsonl`).
+
+**Practical implication:** For qualitative review (what happened, how many rounds, what felt wrong), in-session context is sufficient and reading the JSONL is unnecessary cost. Only read the JSONL if precise timing per phase is explicitly needed.
+
+**Also note:** If `/compact` has been run, in-session context no longer contains the full message history — only the compact summary. At that point, the JSONL is the only way to recover the detailed session content.
+
+---
+
 ## Open Questions
 
 1. **Does compaction impact the session summary recorded in local files?** If compaction rewrites the conversation, does it affect what gets saved to disk — and is any context permanently lost?
