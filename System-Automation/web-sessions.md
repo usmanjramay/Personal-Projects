@@ -52,18 +52,26 @@ When a web session runs on a schedule (or any time Claude is not being watched),
 
 ### What is needed to enable it
 
-- Branch protection rules must be enabled on `main` (required by GitHub before auto-merge can be turned on).
-- At least one status check must be required — even a trivial one — because auto-merge only triggers after checks pass.
-- For repos with no code (like these), no real GitHub Actions workflows are needed. A minimal workflow that always returns green is sufficient to satisfy the requirement.
+Two settings in GitHub, nothing else:
 
-**Current decision:** Not setting this up yet — there is no current need for scheduled agents that commit to these repos. When the need arises, the steps above are what to follow.
+1. **Enable branch protection on `main`** — GitHub requires this as a prerequisite before auto-merge can be turned on. No checks need to be required; just having branch protection active is enough.
+2. **Enable auto-merge on the repo** — once branch protection is on, this can be turned on in repo Settings → General.
+
+No GitHub Actions or CI workflows are needed. Since there are no required checks, the auto-merge condition is satisfied the moment the PR is created. The full flow becomes:
+
+1. Claude creates a branch and pushes changes
+2. Claude opens a PR
+3. GitHub auto-merges it to main within seconds
+4. Done — no human action needed
+
+**Current decision:** Not setting this up yet — there is no current need for scheduled agents that commit to these repos. When the need arises, the two steps above are all that is required.
 
 ---
 
 ## Open Items
 
 - [ ] Add `.mcp.json` to the `EoL-Context` repo so web sessions there have the same MCP access as Personal-Projects.
-- [ ] When unattended scheduled sessions are needed: enable branch protection on `main` + add a minimal always-green GitHub Actions workflow + enable auto-merge on the repo.
+- [ ] When unattended scheduled sessions are needed: enable branch protection on `main` (no checks required) + enable auto-merge on the repo — two settings, no GitHub Actions needed.
 
 ---
 
