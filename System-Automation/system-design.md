@@ -74,14 +74,14 @@ Bring all findings — exploration results, user story, and adversarial review o
 
 ---
 
-### Step 3 — Implementation Plan and Task Breakdown
+### Step 3 — Implementation Plan
 
-Once the direction is agreed upon, build a concrete implementation plan.
+Once the direction is agreed upon, build a concrete implementation plan with task breakdown.
 
 **Structure:**
 - Break the work into discrete steps that can each be executed and tested independently
 - Each step should be small enough to be handed to a sub-agent with clear inputs and expected outputs
-- Follow the pattern that superpowers uses: each task verifiable before the next one starts
+- Follow the pattern that superpowers uses: each task verifiable before the next one starts. After each sub-task in the implementation plan, verify the result is correct before proceeding. Do not skip this.
 
 **Output:** A numbered implementation plan with sub-tasks that are independently executable and testable.
 
@@ -97,18 +97,11 @@ Execute the implementation plan step by step using sub-agents where appropriate.
 ---
 
 ### Step 5 — Testing
-
-Testing happens in two layers:
-
-**Layer 1 — Per-task verification (during execution)**
-After each sub-task in the implementation plan, verify the result is correct before proceeding. Do not skip this.
-
-**Layer 2 — Final end-to-end check (after all tasks complete)**
 Once all tasks are done, run a full check of the finished system against the wish list from the User Story. For anything with a visual or interactive component, do a manual walkthrough using a clean Chrome profile with no personal accounts logged in — this ensures the test reflects what a real user would experience.
 
 ---
 
-### Step 6 — Learnings
+### Step 6 — Wrapup
 
 After the work is done, document what was learned so future work benefits from it.
 
@@ -121,10 +114,22 @@ After the work is done, document what was learned so future work benefits from i
 
 ---
 
+## Document Structure
+
+Each project or feature produces a set of documents that correspond to the process steps. Five document types are used:
+
+| # | Document | Created in | Purpose |
+|---|----------|------------|---------|
+| 1 | **System document** | — | High-level reference for how a system works — architecture, design decisions, and ongoing learnings. This file is an example. |
+| 2 | **User story document** | Step 1 | Captures the problem, pain points, wish list, and constraints agreed on with the user before any work begins. |
+| 3 | **Design document** | Step 2 | Records what was found during research — options explored, alternatives considered, adversarial review outputs, and the agreed direction. |
+| 4 | **Implementation plan document** | Step 3 | The numbered task breakdown used to execute the work — each task independently executable and testable. |
+| 5 | **Feature document** | Step 6 | Post-ship summary of what was built, what was learned, and any open questions for future work. |
+
+---
+
 ## Change Log
 
 | Date | Change | Why |
 |------|--------|-----|
 | 2026-04-25 | File created | Documenting the AI agent workflow process based on initial research |
-| 2026-04-25 | Restructured process: merged discovery into Step 1 (4 subsections), renumbered steps, added Step 5 Learnings | Consolidating user story, research, and adversarial review under one discovery phase |
-| 2026-04-26 | Separated User Story into its own Step 1; renamed remaining discovery steps to Step 2 — Research (2a–2c); renumbered all subsequent steps | Making the user story an explicit first step before research begins |
