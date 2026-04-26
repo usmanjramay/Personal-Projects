@@ -1,15 +1,1 @@
-{
-  "mcpServers": {
-    "my-second-brain": {
-      "type": "http",
-      "url": "https://waeijzskhboqphxjscah.supabase.co/functions/v1/second-brain-mcp?key=x3zfKqGIENhufmIW3p0MxY-I41ZuEG2AnbKHiYLQ8kA"
-    },
-    "n8n-mcp": {
-      "type": "http",
-      "url": "https://n8n.srv1016866.hstgr.cloud/mcp-server/http",
-      "headers": {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0MmM4NGNhNi1jNDAzLTRiYjctOTk5Yi0zZmIxOTYwZWE0NzMiLCJpc3MiOiJuOG4iLCJhdWQiOiJtY3Atc2VydmVyLWFwaSIsImp0aSI6IjRlMmU1Y2Q1LTVkYjMtNDFmOC1iMTg5LTVmZTBkOTcxMDc1NCIsImlhdCI6MTc3NzIwOTQ4NX0.9bFfppqIAZEBdtJSsxdLhpTigyqjLagqz5ApDp8N8Vk"
-      }
-    }
-  }
-}
+{}
