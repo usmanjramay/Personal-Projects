@@ -20,6 +20,7 @@
 - [ ] Explore setting up a clean Chrome profile (no personal accounts) for final visual testing
 - [ ] Define what "adversarial review" prompts look like in practice — write reusable templates for each type
 - Idea: consider whether the adversarial review agents should run in parallel or sequentially
+- [ ] **VS Code extension ignores `~/.claude/settings.json` allowlists (confirmed bug)** — the extension has its own permission layer that always prompts, regardless of what's in the allowlist. Two options: (A) enable `claudeCode.allowDangerouslySkipPermissions: true` + `claudeCode.initialPermissionMode: bypassPermissions` in VS Code settings — blunt but works; or (B) use the `claude` CLI in the integrated terminal with `/ide` to reconnect the diff viewer — granular and fully respects the allowlist. Multiple open GitHub issues; no fix yet as of April 2026.
 
 ---
 
