@@ -17,14 +17,15 @@ The goal of context management is for Claude to always have the right context fo
 
 Each project or feature produces a set of documents that correspond to the New Feature Process steps. See [system-design.md](system-design.md) for the process.
 
-| # | Document | Created in | Purpose |
+| # | Document | Created by | Purpose |
 |---|----------|------------|---------|
-| 1 | **System document** | — | High-level reference for how a system works — architecture, design decisions, and ongoing learnings. |
-| 2 | **User story document** | Step 1 | Captures the problem, pain points, wish list, and constraints agreed on with the user before any work begins. |
-| 3 | **Design document** | Step 2 | Records what was found during research — options explored, alternatives considered, adversarial review outputs, and the agreed direction. |
-| 4 | **Implementation plan document** | Step 3 | The numbered task breakdown used to execute the work — each task independently executable and testable. |
-| 5 | **Feature document** | Step 5 | Post-ship summary of what was built, what was learned, and any open questions for future work. |
-| 6 | **Change Log file** | As needed | Records changes made to skills, tools, or processes — what changed, why, and when. Saved in `Change-Log/` subfolder. Named: `YYYY-MM-DD-[Thing-Changed]-[brief-description].md`. |
+| 1 | **System document** | Usman (manually) | High-level reference for how a system works — architecture, design decisions, and ongoing learnings. |
+| 2 | **User story document** | `/generate-story` skill | Captures the problem, pain points, wish list, and constraints agreed on with the user before any work begins. |
+| 3 | **Research document** | `/solution-research` skill | Surveys the problem space and available options — tools, approaches, alternatives, and adversarial review outputs gathered before committing to a direction. |
+| 4 | **Design document** | `/superpowers:brainstorm` skill | Records the agreed direction coming out of research and brainstorming — what to build, key decisions, and why. |
+| 5 | **Implementation plan document** | `/superpowers:write-plan` skill | The numbered task breakdown used to execute the work — each task independently executable and testable. |
+| 6 | **Feature document** | `/superpowers:requesting-code-review` skill | Triggers a review checklist that compares the implementation against the plan, highlighting discrepancies to document or fix. Post-ship summary of what was built, what was learned, and open questions for future work. |
+| 7 | **Change Log file** | As needed | Records changes made to skills, tools, or processes — what changed, why, and when. Saved in `Change-Log/` subfolder. Named: `YYYY-MM-DD-[Thing-Changed]-[brief-description].md`. |
 
 ---
 
