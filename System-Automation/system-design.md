@@ -125,7 +125,7 @@ Each project or feature produces a set of documents that correspond to the proce
 | 3 | **Design document** | Step 2 | Records what was found during research — options explored, alternatives considered, adversarial review outputs, and the agreed direction. |
 | 4 | **Implementation plan document** | Step 3 | The numbered task breakdown used to execute the work — each task independently executable and testable. |
 | 5 | **Feature document** | Step 6 | Post-ship summary of what was built, what was learned, and any open questions for future work. |
-| 6 | **Change Log file** | As needed | Records changes made to skills, tools, or processes — what changed, why, and when. Named: `YYYY-MM-DD-[Thing-Changed]-[brief-description].md`. |
+| 6 | **Change Log file** | As needed | Records changes made to skills, tools, or processes — what changed, why, and when. Saved in `Change-Log/` subfolder. Named: `YYYY-MM-DD-[Thing-Changed]-[brief-description].md`. |
 
 ---
 
@@ -133,5 +133,7 @@ Each project or feature produces a set of documents that correspond to the proce
 
 | Date | Change | Why |
 |------|--------|-----|
+| 2026-04-26 | Change Log file updated to specify Change-Log/ subfolder | Corrected location after user moved first change log to subfolder |
+| 2026-04-26 | Added /review-n-learn skill to system | Need a standard way to extract learnings from sessions and convert to system improvements |
 | 2026-04-26 | Added Change Log file as document type 6 | First change log file created; needed a category in the document structure table |
 | 2026-04-25 | File created | Documenting the AI agent workflow process based on initial research |
