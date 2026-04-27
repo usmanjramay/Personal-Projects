@@ -1,7 +1,7 @@
-# AI Agent System Design
+# System Design
 
 **Status:** Planning
-**Last updated:** 2026-04-25
+**Last updated:** 2026-04-27
 
 > A living reference for how to use AI agents more effectively — updated as we learn and experiment.
 
@@ -32,6 +32,10 @@ For fast capture without wasting tokens: use a bash append command to write to `
 The `/review-n-learn` skill reviews any session to extract improvement ideas and update the system. Run it before closing or compacting a chat where something felt worth capturing — it works from in-session context at zero extra cost.
 
 Skill file: [`~/.claude/skills/review-n-learn/SKILL.md`](~/.claude/skills/review-n-learn/SKILL.md)
+
+The `/session-analytics` skill analyzes past Claude Code sessions to surface patterns — what kinds of tasks are taking the most tokens, where time is being spent, and what that reveals about how to work more efficiently. Run it periodically to get a data-driven view of usage across sessions.
+
+Skill file: [`~/.claude/skills/session-analytics/SKILL.md`](~/.claude/skills/session-analytics/SKILL.md)
 
 ### Automation
 
@@ -86,6 +90,7 @@ Full check of the finished system against the wish list from the User Story. *St
 |------|--------|-----|
 | 2026-04-26 | Added System Processes section; renamed process to New Feature Process; removed Step 6 (Wrapup) | Wrapup is on-demand, not a fixed step; Quick Notes and Review and Learn are system-wide capabilities, not feature-specific |
 | 2026-04-26 | Change Log file updated to specify Change-Log/ subfolder | Corrected location after user moved first change log to subfolder |
+| 2026-04-27 | Added /session-analytics skill to Self-Improvement section | Need a data-driven view of token and time usage across sessions |
 | 2026-04-26 | Added /review-n-learn skill to system | Need a standard way to extract learnings from sessions and convert to system improvements |
 | 2026-04-26 | Added Change Log file as document type 6 | First change log file created; needed a category in the document structure table |
 | 2026-04-25 | File created | Documenting the AI agent workflow process based on initial research |
