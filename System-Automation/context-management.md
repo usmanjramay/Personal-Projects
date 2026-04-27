@@ -74,6 +74,8 @@ For VPS access details, see @remote_vps.md.
 Every file, regardless of type, must open with this header:
 
 ```markdown
+# [File / Feature / Project Name]
+
 <!-- One or two sentences on what this file is and why it exists. -->
 
 **Document type:** [System | User Story | Research | Design | Implementation Plan | Feature | Change Log]
@@ -87,6 +89,8 @@ Every file, regardless of type, must open with this header:
 In addition to the mandatory header above, living documents include the following sections:
 
 ```markdown
+# [File / Feature / Project Name]
+
 <!-- One or two sentences on what this file is and why it exists. -->
 
 **Document type:** [System | Feature]
@@ -96,15 +100,27 @@ In addition to the mandatory header above, living documents include the followin
 
 ## Section Map
 
-| Section | Line |
-|---------|------|
-| [Section name] | ~00 |
+| Section               | Line |
+|-----------------------|------|
+| Open Items            | ~00  |
+| Critical Assumptions  | ~00  |
+| [Detail Section Name] | ~00  |
+| Change Log            | ~00  |
 
 ---
 
 ## Open Items
 
-1. [Outstanding task, question, or decision]
+Valid statuses: **[Idea]**, **[In-Progress]**, **[Limitation]**, **[Blocked]**
+
+1. **[In-Progress]** Migrate authentication flow to the new provider
+   - a. Token exchange step is complete
+   - b. Redirect URL still needs updating in the provider dashboard
+   - c. Test coverage for edge cases not yet written
+
+2. **[Idea]** Add rate limiting to the webhook endpoint
+   - a. Evaluate whether this belongs in the gateway or in the handler
+   - b. No timeline yet — revisit after initial launch
 
 ---
 
@@ -126,10 +142,10 @@ _No fixed format. Include whatever information best explains this system or feat
 
 ## Change Log
 
-Most recent first. Major changes only — small corrections belong in git history. If a Change Log file in `Change-Log/` is relevant, reference it here.
+Most recent first. Major changes only — small corrections belong in git history. If a change is significant enough to warrant more detail, create a file for it in `Change-Log/` and reference it from this table.
 
-| Date | Change | Why |
-|------|--------|-----|
+| Date       | Change         | Why      |
+|------------|----------------|----------|
 | YYYY-MM-DD | [What changed] | [Reason] |
 ```
 
