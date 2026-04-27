@@ -1,6 +1,6 @@
 # Context Management
 
-Reference file for how context is structured and maintained across Claude Code sessions in this project.
+Reference file for how context is structured and maintained across Claude Code sessions in this project. The goal of context management is for Claude to always have the right context for every conversation — without Usman having to do anything manually. This file tracks how that system is set up so it can be improved over time.
 
 **Document type:** System
 **Last updated:** 2026-04-27
@@ -12,23 +12,16 @@ Reference file for how context is structured and maintained across Claude Code s
 | Section                | Line |
 |------------------------|------|
 | Open Items             | ~23  |
-| Why This File Exists   | ~29  |
-| Structure              | ~35  |
-| Document Types         | ~42  |
-| Writing Markdown Files | ~60  |
-| Change Log             | ~204 |
+| Structure              | ~29  |
+| Document Types         | ~36  |
+| Writing Markdown Files | ~54  |
+| Change Log             | ~198 |
 
 ---
 
 ## Open Items
 
 _No open items._
-
----
-
-## Why This File Exists
-
-The goal of context management is for Claude to always have the right context for every conversation — without Usman having to do anything manually. This file tracks how that system is set up so it can be improved over time.
 
 ---
 
