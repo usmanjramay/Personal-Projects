@@ -1,5 +1,31 @@
 # Context Management
 
+<!-- Reference file for how context is structured and maintained across Claude Code sessions in this project. -->
+
+**Document type:** System
+**Last updated:** 2026-04-27
+
+---
+
+## Section Map
+
+| Section                | Line |
+|------------------------|------|
+| Open Items             | ~23  |
+| Why This File Exists   | ~29  |
+| Structure              | ~35  |
+| Document Types         | ~42  |
+| Writing Markdown Files | ~60  |
+| Change Log             | ~204 |
+
+---
+
+## Open Items
+
+_No open items._
+
+---
+
 ## Why This File Exists
 
 The goal of context management is for Claude to always have the right context for every conversation — without Usman having to do anything manually. This file tracks how that system is set up so it can be improved over time.
@@ -172,3 +198,11 @@ Do not restructure or rename existing sections — just bring the header and req
 3. **Edit precisely** — make the targeted change without loading the rest of the file.
 
 This is why consistent headers matter: they are what grep matches on. Live documents (system and feature documents) should include a **Section Map** near the top so Claude can navigate directly to any section without a grep step.
+
+---
+
+## Change Log
+
+| Date       | Change                                                              | Why                                                                 |
+|------------|---------------------------------------------------------------------|---------------------------------------------------------------------|
+| 2026-04-27 | Added templates, cross-referencing section, When Editing Existing Files rule, and applied new template to this file | Consolidate all markdown writing standards in one place             |
