@@ -1,6 +1,6 @@
 # System Design
 
-**Status:** Planning
+**Document type:** System
 **Last updated:** 2026-04-27
 
 > A living reference for how to use AI agents more effectively — updated as we learn and experiment.
@@ -21,11 +21,19 @@
 
 ## System Processes
 
-Capabilities that support the work across all projects — not tied to a specific phase or workflow.
+Capabilities that support the work across all projects — not tied to a specific phase or workflow. More details on the infrastructure can be found in: [`claude-environments.md`](claude-environments.md), [`remote-vps-setup.md`](remote-vps-setup.md), [`second-brain-setup.md`](second-brain-setup.md), [`executive-assistant-agent.md`](executive-assistant-agent.md), [`google-accounts.md`](google-accounts.md).
 
 ### Quick Notes
 
 For fast capture without wasting tokens: use a bash append command to write to `~/.claude/quick-notes.md` without reading the file first. This is the standard process documented in the global [`CLAUDE.md`](~/.claude/CLAUDE.md). Do not use the Read tool before appending, and do not use the Second Brain MCP for quick captures.
+
+### Context Management
+
+How Claude Code context files are structured — what lives globally vs. per-project, how documents are organized, and the principles behind those decisions. Covered in [`context-management.md`](context-management.md).
+
+### Automation
+
+All n8n automation workflows are managed through the `n8n-automation-skill`, which is global and has its own self-improvement loop. More details on how Claude Code runs across different environments (VS Code, web, CLI) and what's available in each are covered in [`claude-environments.md`](claude-environments.md).
 
 ### Self-Improvement
 
@@ -37,18 +45,14 @@ The `/session-analytics` skill analyzes past Claude Code sessions to surface pat
 
 Skill file: [`~/.claude/skills/session-analytics/SKILL.md`](~/.claude/skills/session-analytics/SKILL.md)
 
-### Automation
-
-All n8n automation workflows are managed through the `n8n-automation-skill`, which is global and has its own self-improvement loop. More details on how Claude Code runs across different environments (VS Code, web, CLI) and what's available in each are covered in [`claude-environments.md`](claude-environments.md).
-
 ### Git Workflow
 
 - **`git pull`** on session start → configured as a SessionStart hook in `settings.json`. Runs automatically — hooks are more reliable than a CLAUDE.md rule.
 - **`git push`** after approved changes → rule in global `CLAUDE.md`. Done at end of task, not automatically, to preserve a review checkpoint. Auto-push via hook was rejected: risk of pushing untested changes.
 
-### Context Management
+### Token Optimization
 
-How Claude Code context files are structured — what lives globally vs. per-project, how documents are organized, and the principles behind those decisions. Covered in [`context-management.md`](context-management.md).
+Aimed at improving efficiency and making sure we're not wasting tokens — covering how to structure prompts, use context wisely, and avoid common sources of token bloat. Covered in [`token-optimization.md`](token-optimization.md).
 
 ---
 
@@ -90,6 +94,7 @@ Full check of the finished system against the wish list from the User Story. *St
 |------|--------|-----|
 | 2026-04-26 | Added System Processes section; renamed process to New Feature Process; removed Step 6 (Wrapup) | Wrapup is on-demand, not a fixed step; Quick Notes and Review and Learn are system-wide capabilities, not feature-specific |
 | 2026-04-26 | Change Log file updated to specify Change-Log/ subfolder | Corrected location after user moved first change log to subfolder |
+| 2026-04-27 | Fixed header from Status to Document type; reordered System Processes; added Token Optimization section; added infrastructure links to System Processes description | Header was wrong per template; reorder puts reference material before tools; token optimization is a system-wide concern |
 | 2026-04-27 | Added /session-analytics skill to Self-Improvement section | Need a data-driven view of token and time usage across sessions |
 | 2026-04-26 | Added /review-n-learn skill to system | Need a standard way to extract learnings from sessions and convert to system improvements |
 | 2026-04-26 | Added Change Log file as document type 6 | First change log file created; needed a category in the document structure table |
