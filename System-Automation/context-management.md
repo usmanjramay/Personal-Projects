@@ -1,9 +1,9 @@
 # Context Management
 
-Reference file for how context is structured and maintained across Claude Code sessions in this project. The goal of context management is for Claude to always have the right context for every conversation — without Usman having to do anything manually. This file tracks how that system is set up so it can be improved over time.
-
 **Document type:** System
 **Last updated:** 2026-04-27
+
+> Reference file for how context is structured and maintained across Claude Code sessions in this project. The goal of context management is for Claude to always have the right context for every conversation — without Usman having to do anything manually.
 
 ---
 
@@ -78,8 +78,8 @@ Each feature gets its own subfolder. The user story, research, design, implement
 
 **All files:**
 
-- Open with a brief context summary — one or two sentences on what this file is and why it exists.
-- Follow with two metadata lines: **Document type** and **Last updated**.
+- Open with two metadata lines: **Document type** and **Last updated**.
+- Follow with a blockquote summary (`>`) — one or two sentences on what this file is and why it exists.
 
 **Live files (system documents and feature documents) only:**
 
@@ -119,10 +119,10 @@ Every file, regardless of type, must open with this header:
 ```markdown
 # [File / Feature / Project Name]
 
-One or two sentences on what this file is and why it exists.
-
 **Document type:** [System | User Story | Research | Design | Implementation Plan | Feature | Change Log]
 **Last updated:** YYYY-MM-DD
+
+> One or two sentences on what this file is and why it exists.
 ```
 
 ---
@@ -134,10 +134,10 @@ In addition to the mandatory header above, living documents include the followin
 ```markdown
 # [File / Feature / Project Name]
 
-One or two sentences on what this file is and why it exists.
-
 **Document type:** [System | Feature]
 **Last updated:** YYYY-MM-DD
+
+> One or two sentences on what this file is and why it exists.
 
 ---
 
