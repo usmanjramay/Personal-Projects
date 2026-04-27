@@ -103,7 +103,7 @@ For VPS access details, see @remote_vps.md.
 Whenever editing any markdown file in this project, check and update it to match the templates below — without losing any existing information. Specifically:
 
 1. **Header (all files):** Ensure the file opens with an H1 title, a context summary, and the `Document type` and `Last updated` metadata lines. If the document type is unclear, ask before proceeding.
-2. **Living documents (System and Feature types):** Also ensure a **Section Map** and **Open Items** section are present and follow Template 2. If either is missing, add it.
+2. **Living documents (System and Feature types):** Also ensure a **Section Map**, **Open Items**, and **Change Log** section are present and follow Template 2. If any are missing, add them.
 3. **Critical Assumptions:** This section is optional. Add it if the file describes something that depends on an external factor that could change. If it's already present, make sure it follows the template format. If it's unclear whether it applies, ask.
 
 Do not restructure or rename existing sections — just bring the header and required sections into alignment with the template.
