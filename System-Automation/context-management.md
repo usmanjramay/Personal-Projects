@@ -86,7 +86,7 @@ Each feature gets its own subfolder. The user story, research, design, implement
 - Include an **Open Items** section with a numbered list of outstanding tasks, questions, or decisions.
 - Include a **Critical Assumptions** section only when the system or feature depends on something external that could change and would require updating this file if it did.
 - Include a **Section Map** near the top listing each section and its approximate line number, so Claude can navigate without reading the full file first.
-- Include a **Change Log** at the end — major changes only. Small corrections belong in git history. When a log file in `Log-Files/` is relevant to this system or feature, reference it from this section.
+- Include a **Change Log** at the end — major changes only. Small corrections belong in git history. If a change is significant enough to warrant more detail than a single row, create a log file in `Log-Files/` named `YYYY-MM-DD-[Thing-Changed]-[brief-description].md` and reference it from this table.
 
 ### Cross-Referencing Related Files
 
