@@ -58,7 +58,7 @@ Each feature gets its own subfolder. The user story, research, design, implement
 | 4 | **Design document** | `/superpowers:brainstorm` skill | Records the agreed direction coming out of research and brainstorming — what to build, key decisions, and why. |
 | 5 | **Implementation plan document** | `/superpowers:write-plan` skill | The numbered task breakdown used to execute the work — each task independently executable and testable. |
 | 6 | **Feature document** | `/superpowers:requesting-code-review` skill | Triggers a review checklist that compares the implementation against the plan, highlighting discrepancies to document or fix. Post-ship summary of what was built, what was learned, and open questions for future work. |
-| 7 | **Change Log file** | As needed | Records changes made to skills, tools, or processes — what changed, why, and when. Saved in `Change-Log/` subfolder. Named: `YYYY-MM-DD-[Thing-Changed]-[brief-description].md`. |
+| 7 | **Log file** | As needed | Records notable events related to a skill, tool, or process — changes, issues, or other events worth tracking over time. Can be a Change Log, Issue Log, or any other log type. Saved in `Log-Files/` subfolder. Named: `YYYY-MM-DD-[Thing-Changed]-[brief-description].md`. |
 
 ---
 
@@ -86,7 +86,7 @@ Each feature gets its own subfolder. The user story, research, design, implement
 - Include an **Open Items** section with a numbered list of outstanding tasks, questions, or decisions.
 - Include a **Critical Assumptions** section only when the system or feature depends on something external that could change and would require updating this file if it did.
 - Include a **Section Map** near the top listing each section and its approximate line number, so Claude can navigate without reading the full file first.
-- Include a **Change Log** at the end — major changes only. Small corrections belong in git history. When a Change Log file in `Change-Log/` is relevant to this system or feature, reference it from this section.
+- Include a **Change Log** at the end — major changes only. Small corrections belong in git history. When a log file in `Log-Files/` is relevant to this system or feature, reference it from this section.
 
 ### Cross-Referencing Related Files
 
@@ -119,7 +119,7 @@ Every file, regardless of type, must open with this header:
 ```markdown
 # [File / Feature / Project Name]
 
-**Document type:** [System | User Story | Research | Design | Implementation Plan | Feature | Change Log]
+**Document type:** [System | User Story | Research | Design | Implementation Plan | Feature | Log File]
 **Last updated:** YYYY-MM-DD
 
 > One or two sentences on what this file is and why it exists.
@@ -185,7 +185,7 @@ _No fixed format. Include whatever information best explains this system or feat
 
 ## Change Log
 
-Most recent first. Major changes only — small corrections belong in git history. If a change is significant enough to warrant more detail, create a file for it in `Change-Log/` and reference it from this table.
+Most recent first. Major changes only — small corrections belong in git history. If a change is significant enough to warrant more detail, create a file for it in `Log-Files/` and reference it from this table.
 
 | Date       | Change         | Why      |
 |------------|----------------|----------|
@@ -198,5 +198,6 @@ Most recent first. Major changes only — small corrections belong in git histor
 
 | Date       | Change                                                              | Why                                                                 |
 |------------|---------------------------------------------------------------------|---------------------------------------------------------------------|
+| 2026-04-27 | Renamed Change-Log/ folder to Log-Files/; updated document type 7 from "Change Log file" to "Log file"; updated all references to reflect that log files can be different types (change logs, issue logs, etc.) | Folder name was too narrow — Log-Files/ can hold any kind of log, not just change logs |
 | 2026-04-27 | Merged How Claude Reads Files into Structure; moved When Editing Existing Files before Templates | Improve logical flow of the document |
 | 2026-04-27 | Added templates, cross-referencing section, When Editing Existing Files rule, and applied new template to this file | Consolidate all markdown writing standards in one place             |

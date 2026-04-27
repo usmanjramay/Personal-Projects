@@ -95,6 +95,7 @@ Full check of the finished system against the wish list from the User Story. *St
 | 2026-04-26 | Added System Processes section; renamed process to New Feature Process; removed Step 6 (Wrapup) | Wrapup is on-demand, not a fixed step; Quick Notes and Review and Learn are system-wide capabilities, not feature-specific |
 | 2026-04-26 | Change Log file updated to specify Change-Log/ subfolder | Corrected location after user moved first change log to subfolder |
 | 2026-04-27 | Fixed header from Status to Document type; reordered System Processes; added Token Optimization section; added infrastructure links to System Processes description | Header was wrong per template; reorder puts reference material before tools; token optimization is a system-wide concern |
+| 2026-04-27 | Renamed Change-Log/ folder to Log-Files/ across the system | Folder name was too narrow — Log-Files/ can hold any kind of log, not just change logs |
 | 2026-04-27 | Added /session-analytics skill to Self-Improvement section | Need a data-driven view of token and time usage across sessions |
 | 2026-04-26 | Added /review-n-learn skill to system | Need a standard way to extract learnings from sessions and convert to system improvements |
 | 2026-04-26 | Added Change Log file as document type 6 | First change log file created; needed a category in the document structure table |
