@@ -105,6 +105,7 @@ Whenever editing any markdown file in this project, check and update it to match
 1. **Header (all files):** Ensure the file opens with an H1 title, a context summary, and the `Document type` and `Last updated` metadata lines. If the document type is unclear, ask before proceeding.
 2. **Living documents (System and Feature types):** Also ensure a **Section Map**, **Open Items**, and **Change Log** section are present and follow Template 2. If any are missing, add them.
 3. **Critical Assumptions:** This section is optional. Add it if the file describes something that depends on an external factor that could change. If it's already present, make sure it follows the template format. If it's unclear whether it applies, ask.
+4. **Change Log — do NOT add an entry for the current edit** unless the change is significant. Significant means: adding or removing a major section, renaming a core process, a decision that changes how the system is used, or a structural change that would be confusing without a record. Small corrections, wording tweaks, open item removals, date updates, and minor additions do not qualify — those belong in git history.
 
 Do not restructure or rename existing sections — just bring the header and required sections into alignment with the template.
 
