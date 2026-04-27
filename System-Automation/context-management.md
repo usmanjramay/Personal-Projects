@@ -57,6 +57,84 @@ Each feature gets its own subfolder. The user story, research, design, implement
 - Include a **Section Map** near the top listing each section and its approximate line number, so Claude can navigate without reading the full file first.
 - Include a **Change Log** at the end — major changes only. Small corrections belong in git history. When a Change Log file in `Change-Log/` is relevant to this system or feature, reference it from this section.
 
+### Cross-Referencing Related Files
+
+Use `@path/to/file` syntax inline, near the content it relates to — not in a separate "See also" section at the bottom. Claude does not auto-discover relationships; you must reference files explicitly. Only link files Claude would genuinely need for the current task.
+
+```markdown
+For VPS access details, see @remote_vps.md.
+```
+
+---
+
+### Templates
+
+**Template 1 — All files (mandatory header)**
+
+Every file, regardless of type, must open with this header:
+
+```markdown
+<!-- One or two sentences on what this file is and why it exists. -->
+
+**Document type:** [System | User Story | Research | Design | Implementation Plan | Feature | Change Log]
+**Last updated:** YYYY-MM-DD
+```
+
+---
+
+**Template 2 — Living documents (system and feature documents)**
+
+In addition to the mandatory header above, living documents include the following sections:
+
+```markdown
+<!-- One or two sentences on what this file is and why it exists. -->
+
+**Document type:** [System | Feature]
+**Last updated:** YYYY-MM-DD
+
+---
+
+## Section Map
+
+| Section | Line |
+|---------|------|
+| [Section name] | ~00 |
+
+---
+
+## Open Items
+
+1. [Outstanding task, question, or decision]
+
+---
+
+## Critical Assumptions
+
+_Only include if this system or feature depends on something external that could change and would require updating this file._
+
+| Assumption | Current value | If this changes... |
+|------------|--------------|-------------------|
+| [Assumption] | [Value] | [What to update] |
+
+---
+
+## [Detail Section — flexible]
+
+_No fixed format. Include whatever information best explains this system or feature: architecture tables, numbered flows, component descriptions, diagrams, etc. Do not omit relevant technical details._
+
+---
+
+## Change Log
+
+Most recent first. Major changes only — small corrections belong in git history. If a Change Log file in `Change-Log/` is relevant, reference it here.
+
+| Date | Change | Why |
+|------|--------|-----|
+| YYYY-MM-DD | [What changed] | [Reason] |
+```
+
+---
+
 ### How Claude Reads Files
 
 **Claude can read specific line ranges.** The Read tool accepts `offset` (start line) and `limit` (number of lines), so only the relevant slice of a file needs to be loaded. The standard pattern is:
