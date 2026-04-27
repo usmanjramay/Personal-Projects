@@ -104,7 +104,7 @@ In addition to the mandatory header above, living documents include the followin
 |-----------------------|------|
 | Open Items            | ~00  |
 | Critical Assumptions  | ~00  |
-| [Detail Section Name] | ~00  |
+| How It Works          | ~00  |
 | Change Log            | ~00  |
 
 ---
@@ -134,7 +134,7 @@ _Only include if this system or feature depends on something external that could
 
 ---
 
-## [Detail Section — flexible]
+## How It Works
 
 _No fixed format. Include whatever information best explains this system or feature: architecture tables, numbered flows, component descriptions, diagrams, etc. Do not omit relevant technical details._
 
@@ -148,6 +148,18 @@ Most recent first. Major changes only — small corrections belong in git histor
 |------------|----------------|----------|
 | YYYY-MM-DD | [What changed] | [Reason] |
 ```
+
+---
+
+### When Editing Existing Files
+
+Whenever editing any markdown file in this project, check and update it to match the templates above — without losing any existing information. Specifically:
+
+1. **Header (all files):** Ensure the file opens with an H1 title, a context summary comment, and the `Document type` and `Last updated` metadata lines. If the document type is unclear, ask before proceeding.
+2. **Living documents (System and Feature types):** Also ensure a **Section Map** and **Open Items** section are present and follow Template 2. If either is missing, add it.
+3. **Critical Assumptions:** This section is optional. Add it if the file describes something that depends on an external factor that could change. If it's already present, make sure it follows the template format. If it's unclear whether it applies, ask.
+
+Do not restructure or rename existing sections — just bring the header and required sections into alignment with the template.
 
 ---
 
