@@ -11,11 +11,11 @@ Reference file for how context is structured and maintained across Claude Code s
 
 | Section                | Line |
 |------------------------|------|
-| Open Items             | ~23  |
-| Structure              | ~29  |
-| Document Types         | ~36  |
-| Writing Markdown Files | ~54  |
-| Change Log             | ~198 |
+| Open Items             | ~22  |
+| Structure              | ~28  |
+| Document Types         | ~47  |
+| Writing Markdown Files | ~65  |
+| Change Log             | ~197 |
 
 ---
 
@@ -27,8 +27,20 @@ _No open items._
 
 ## Structure
 
+### File Organization
+
 - **Global (`~/.claude/`):** Applies to every Claude Code session — contains `CLAUDE.md` (universal rules), `settings.json` (hooks and permissions), skills, and slash commands.
 - **Per-project:** Each project has a `CLAUDE.md` plus one main file that describes the project's structure, tracks open items, and summarizes current status. This main file is always the first to read when starting work on a project, and it contains references to all other files in that project.
+
+### How Claude Reads Files
+
+**Claude can read specific line ranges.** The Read tool accepts `offset` (start line) and `limit` (number of lines), so only the relevant slice of a file needs to be loaded. The standard pattern is:
+
+1. **Grep to locate** — run `grep -n "<heading or keyword>" <file>` to find the exact line number.
+2. **Read the slice** — call Read with `offset` set to just before that line.
+3. **Edit precisely** — make the targeted change without loading the rest of the file.
+
+This is why consistent headers matter: they are what grep matches on. Live documents (system and feature documents) should include a **Section Map** near the top so Claude can navigate directly to any section without a grep step.
 
 ---
 
@@ -83,6 +95,18 @@ Use `@path/to/file` syntax inline, near the content it relates to — not in a s
 ```markdown
 For VPS access details, see @remote_vps.md.
 ```
+
+---
+
+### When Editing Existing Files
+
+Whenever editing any markdown file in this project, check and update it to match the templates below — without losing any existing information. Specifically:
+
+1. **Header (all files):** Ensure the file opens with an H1 title, a context summary, and the `Document type` and `Last updated` metadata lines. If the document type is unclear, ask before proceeding.
+2. **Living documents (System and Feature types):** Also ensure a **Section Map** and **Open Items** section are present and follow Template 2. If either is missing, add it.
+3. **Critical Assumptions:** This section is optional. Add it if the file describes something that depends on an external factor that could change. If it's already present, make sure it follows the template format. If it's unclear whether it applies, ask.
+
+Do not restructure or rename existing sections — just bring the header and required sections into alignment with the template.
 
 ---
 
@@ -170,32 +194,9 @@ Most recent first. Major changes only — small corrections belong in git histor
 
 ---
 
-### When Editing Existing Files
-
-Whenever editing any markdown file in this project, check and update it to match the templates above — without losing any existing information. Specifically:
-
-1. **Header (all files):** Ensure the file opens with an H1 title, a context summary comment, and the `Document type` and `Last updated` metadata lines. If the document type is unclear, ask before proceeding.
-2. **Living documents (System and Feature types):** Also ensure a **Section Map** and **Open Items** section are present and follow Template 2. If either is missing, add it.
-3. **Critical Assumptions:** This section is optional. Add it if the file describes something that depends on an external factor that could change. If it's already present, make sure it follows the template format. If it's unclear whether it applies, ask.
-
-Do not restructure or rename existing sections — just bring the header and required sections into alignment with the template.
-
----
-
-### How Claude Reads Files
-
-**Claude can read specific line ranges.** The Read tool accepts `offset` (start line) and `limit` (number of lines), so only the relevant slice of a file needs to be loaded. The standard pattern is:
-
-1. **Grep to locate** — run `grep -n "<heading or keyword>" <file>` to find the exact line number.
-2. **Read the slice** — call Read with `offset` set to just before that line.
-3. **Edit precisely** — make the targeted change without loading the rest of the file.
-
-This is why consistent headers matter: they are what grep matches on. Live documents (system and feature documents) should include a **Section Map** near the top so Claude can navigate directly to any section without a grep step.
-
----
-
 ## Change Log
 
 | Date       | Change                                                              | Why                                                                 |
 |------------|---------------------------------------------------------------------|---------------------------------------------------------------------|
+| 2026-04-27 | Merged How Claude Reads Files into Structure; moved When Editing Existing Files before Templates | Improve logical flow of the document |
 | 2026-04-27 | Added templates, cross-referencing section, When Editing Existing Files rule, and applied new template to this file | Consolidate all markdown writing standards in one place             |
