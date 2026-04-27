@@ -1,6 +1,6 @@
 # Context Management
 
-<!-- Reference file for how context is structured and maintained across Claude Code sessions in this project. -->
+Reference file for how context is structured and maintained across Claude Code sessions in this project.
 
 **Document type:** System
 **Last updated:** 2026-04-27
@@ -102,7 +102,7 @@ Every file, regardless of type, must open with this header:
 ```markdown
 # [File / Feature / Project Name]
 
-<!-- One or two sentences on what this file is and why it exists. -->
+One or two sentences on what this file is and why it exists.
 
 **Document type:** [System | User Story | Research | Design | Implementation Plan | Feature | Change Log]
 **Last updated:** YYYY-MM-DD
@@ -117,7 +117,7 @@ In addition to the mandatory header above, living documents include the followin
 ```markdown
 # [File / Feature / Project Name]
 
-<!-- One or two sentences on what this file is and why it exists. -->
+One or two sentences on what this file is and why it exists.
 
 **Document type:** [System | Feature]
 **Last updated:** YYYY-MM-DD
